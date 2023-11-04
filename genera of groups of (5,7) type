@@ -1,1 +1,85 @@
 
+ANSWERS:={};
+
+G5:=GL(2,Integers(5));
+G25:=GL(2,Integers(25));
+
+G7:=GL(2,Integers(7));
+
+Left:=5;
+Right:=7;
+
+GLeftRight:=GL(2,Integers(Left*Right));
+
+KerLeft1:=[[1+Left*x,0,0,1] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft2:=[[1,0,0,1+Left*x] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft3:=[[1,Left,0,1],[1,0,Left,1]];
+
+KerRight1:=[[1+Right*x,0,0,1] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight2:=[[1,0,0,1+Right*x] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
+
+H51:=sub<G5|[2,1,0,3],[1,2,2,0],[1,1,0,2]>; /* 5.5.0.1, 5.5.0.a.1, MAXIMAL */
+H52:=sub<G5|[2,0,0,3],[1,0,1,1],[1,0,0,2]>; /* 5.6.0.1, 5.6.0.a.1, MAXIMAL */
+H53:=sub<G5|[3,1,0,2],[1,2,2,0],[2,2,2,1]>; /* 5.10.0.1, 5.10.0.a.1, MAXIMAL */
+H54:=sub<G5|[4,0,1,4],[1,0,0,2]>; /* 5.12.0.2, 5.12.0.a.2 */
+H55:=sub<G5|[4,0,1,4],[2,0,0,1]>; /* 5.12.0.1, 5.12.0.a.1 */
+H56:=sub<G5|[2,1,0,3],[2,0,2,3],[1,0,2,2]>; /* 5.15.0.1, 5.15.0.a.1 */
+H57:=sub<G5|[3,1,0,2],[2,1,0,1]>; /* 5.30.0.1, 5.30.0.a.1 */
+H58:=sub<G5|[3,1,0,2],[2,1,3,3]>; /* 5.30.0.2, 5.30.0.b.1 */
+H59:=sub<G5|[4,0,0,4],[2,0,0,1]>; /* 5.60.0.1, 5.60.0.a.1 */
+H251:=sub<G25|[2,2,0,13],[4,1,3,1],[2,3,0,6]>; /* 25.30.0.1, 25.30.0.a.1 */
+H252:=sub<G25|[9,10,0,14],[0,7,7,2],[2,8,0,1]>; /* 25.60.0.1, 25.60.0.a.1 */
+H253:=sub<G25|[9,10,0,14],[0,7,7,2],[4,1,0,7]>; /* 25.60.0.2, 25.60.0.a.2 */
+
+X51:=sub<G5|[2,1,0,3],[1,2,2,0],[1,1,0,2]>; /* 5.5.0.1, 5.5.0.a.1, MAXIMAL */
+X52:=sub<G5|[2,0,0,3],[1,0,1,1],[1,0,0,2]>; /* 5.6.0.1, 5.6.0.a.1, MAXIMAL */
+X53:=sub<G5|[3,1,0,2],[1,2,2,0],[2,2,2,1]>; /* 5.10.0.1, 5.10.0.a.1, MAXIMAL */
+X54:=sub<G5|[4,0,1,4],[1,0,0,2]>; /* 5.12.0.2, 5.12.0.a.2 */
+X55:=sub<G5|[4,0,1,4],[2,0,0,1]>; /* 5.12.0.1, 5.12.0.a.1 */
+X56:=sub<G5|[2,1,0,3],[2,0,2,3],[1,0,2,2]>; /* 5.15.0.1, 5.15.0.a.1 */
+X57:=sub<G5|[3,1,0,2],[2,1,0,1]>; /* 5.30.0.1, 5.30.0.a.1 */
+X58:=sub<G5|[3,1,0,2],[2,1,3,3]>; /* 5.30.0.2, 5.30.0.b.1 */
+X59:=sub<G5|[4,0,0,4],[2,0,0,1]>; /* 5.60.0.1, 5.60.0.a.1 */
+X251:=sub<G25|[2,2,0,13],[4,1,3,1],[2,3,0,6]>; /* 25.30.0.1, 25.30.0.a.1 */
+X252:=sub<G25|[9,10,0,14],[0,7,7,2],[2,8,0,1]>; /* 25.60.0.1, 25.60.0.a.1 */
+X253:=sub<G25|[9,10,0,14],[0,7,7,2],[4,1,0,7]>; /* 25.60.0.2, 25.60.0.a.2 */
+
+LeftGroups:=[X51,X52,X53];
+
+H71:=sub<G7|[2,0,0,4],[3,0,1,5],[1,0,0,3]>; /* 7.8.0.1, 7.8.0.a.1, MAXIMAL */
+H72:=sub<G7|[0,3,2,3],[2,4,4,5],[3,1,0,4]>; /* 7.21.0.1, 7.21.0.a.1, MAXIMAL */
+H73:=sub<G7|[6,0,1,6],[1,0,0,3]>; /* 7.24.0.2, 7.24.0.a.2 */
+H74:=sub<G7|[6,0,1,6],[3,0,0,1]>; /* 7.24.0.1, 7.24.0.a.1 */
+H75:=sub<G7|[6,0,1,6],[3,0,0,4]>; /* 7.24.0.3, 7.24.0.b.1 */
+H76:=sub<G7|[3,1,4,4],[4,4,1,3],[3,4,0,4]>; /* 7.28.0.1, 7.28.0.a.1, MAXIMAL */
+
+X71:=sub<GLeftRight|[2,0,0,4],[3,0,1,5+7],[1,0,0,3]>; /* 7.8.0.1, 7.8.0.a.1, MAXIMAL */
+X72:=sub<GLeftRight|[0,3,2,3],[2,4,4,5],[3,1,0,4]>; /* 7.21.0.1, 7.21.0.a.1, MAXIMAL */
+X73:=sub<GLeftRight|[6,0,1,6],[1,0,0,3]>; /* 7.24.0.2, 7.24.0.a.2 */
+X74:=sub<GLeftRight|[6,0,1,6],[3,0,0,1]>; /* 7.24.0.1, 7.24.0.a.1 */
+X75:=sub<GLeftRight|[6,0,1,6],[3,0,0,4]>; /* 7.24.0.3, 7.24.0.b.1 */
+X76:=sub<GLeftRight|[3,1,4,4],[4,4,1,3],[3,4,0,4]>; /* 7.28.0.1, 7.28.0.a.1, MAXIMAL */
+
+RightGroups:=[X71,X72,X76];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#LeftGroups] do
+for j in [1..#RightGroups] do
+print <#LeftGroups-i,#RightGroups-j>;
+XLeft:=sub<GLeftRight|Generators(LeftGroups[i]),KerLeft1,KerLeft2,KerLeft3>;
+XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>;
+X:=XLeft meet XRight;
+if GLeftRight![-1,0,0,-1] in X then
+g:=GL2Genus(X);
+if g lt 2 then
+ANSWERS:=ANSWERS join <GL2Label(LeftGroups[i]),GL2Label(RightGroups[j])>;
+end if;
+end if;
+end for;
+end for;
+
+ANSWERS;
+
