@@ -1,53 +1,126 @@
 
+ANSWERS:={};
+
 G3:=GL(2,Integers(3));
 G9:=GL(2,Integers(9));
 G27:=GL(2,Integers(27));
 
-R:=3;
-S:=11;
+G11:=GL(2,Integers(11));
 
-GRS:=GL(2,Integers(R*S));
+/* level 3*11 */
 
-C1:=[[1+R*x,0,0,1] : x in [0..(1+S)] | GCD(1+R*x,R*S) eq 1];
-C2:=[[1,0,0,1+R*x] : x in [0..(1+S)] | GCD(1+R*x,R*S) eq 1];
-C3:=[[1,R,0,1],[1,0,R,1]];
+Left:=3;
+Right:=11;
 
-D1:=[[1+S*x,0,0,1] : x in [0..(1+R)] | GCD(1+S*x,R*S) eq 1];
-D2:=[[1,0,0,1+S*x] : x in [0..(1+R)] | GCD(1+S*x,R*S) eq 1];
-D3:=[[1,S,0,1],[1,0,S,1]];
+GLeftRight:=GL(2,Integers(Left*Right));
 
-H31:=sub<G3|[0,1,2,0],[1,1,1,2],[1,0,0,2]>; /* 3.3.0.1, 3.3.0.a.1 */
-H32:=sub<G3|[0,1,2,1],[1,2,0,2]>; /* 3.4.0.1, 3.4.0.a.1 */
+KerLeft1:=[[1+Left*x,0,0,1] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft2:=[[1,0,0,1+Left*x] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft3:=[[1,Left,0,1],[1,0,Left,1]];
+
+KerRight1:=[[1+Right*x,0,0,1] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight2:=[[1,0,0,1+Right*x] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
+
+H31:=sub<G3|[0,1,2,0],[1,1,1,2],[1,0,0,2]>; /* 3.3.0.1, 3.3.0.a.1, MAXIMAL */
+H32:=sub<G3|[0,1,2,1],[1,2,0,2]>; /* 3.4.0.1, 3.4.0.a.1, MAXIMAL */
 H33:=sub<G3|[0,1,2,0],[1,0,0,2]>; /* 3.6.0.1, 3.6.0.b.1 */
 H34:=sub<G3|[2,0,0,2],[1,0,0,2]>; /* 3.12.0.1, 3.12.0.a.1 */
+H91:=sub<G9|[0,2,4,0],[1,1,4,5],[1,0,0,2]>; /* 9.9.0.1, 9.9.0.a.1 */
+H92:=sub<G9|[1,1,0,1],[2,0,0,5],[1,0,0,2]>; /* 9.12.0.1, 9.12.0.a.1 */
+H93:=sub<G9|[2,0,0,5],[4,2,3,4],[1,0,0,2]>; /* 9.12.0.2, 9.12.0.b.1 */
+H94:=sub<G9|[2,0,0,5],[1,3,3,1],[0,2,4,0],[1,0,0,2]>; /* 9.18.0.2, 9.18.0.d.1 */
+H95:=sub<G9|[1,3,0,1],[2,1,1,1],[4,2,0,5]>; /* 9.18.0.1, 9.18.0.a.1 */
+H96:=sub<G9|[0,2,4,1],[4,3,5,4],[4,5,0,5]>; /* 9.27.0.1, 9.27.0.a.1, MAXIMAL */
+H97:=sub<G9|[0,4,2,3],[5,1,1,4],[5,3,0,4]>; /* 9.27.0.2, 9.27.0.b.1 */
+H98:=sub<G9|[1,3,0,1],[5,0,3,2],[1,0,2,2]>; /* 9.36.0.2, 9.36.0.b.1 */
+H99:=sub<G9|[1,3,0,1],[5,0,3,2],[2,1,0,1]>; /* 9.36.0.1, 9.36.0.a.1 */
+H910:=sub<G9|[1,3,0,1],[5,0,3,2],[4,2,0,5]>; /* 9.36.0.3, 9.36.0.c.1 */
+H911:=sub<G9|[2,1,0,5],[1,2,3,2]>; /* 9.36.0.5, 9.36.0.d.2 */
+H912:=sub<G9|[2,1,0,5],[4,0,3,5]>; /* 9.36.0.6, 9.36.e.1 */
+H913:=sub<G9|[2,2,0,5],[2,2,3,1]>; /* 9.36.0.4, 9.36.0.d.1 */
+H914:=sub<G9|[1,3,0,1],[2,2,3,8],[1,2,0,2]>; /* 9.36.0.7, 9.36.0.f.2 */
+H915:=sub<G9|[1,3,0,1],[2,2,3,8],[2,1,0,1]>; /* 9.36.0.9, 9.36.0.f.1 */
+H916:=sub<G9|[1,3,0,1],[5,2,3,5],[4,0,0,5]>; /* 9.36.0.8, 9.36.0.g.1 */
+H271:=sub<G27|[1,1,0,1],[2,1,9,5],[1,2,3,2]>; /* 27.36.0.1, 27.36.0.a.1 */
 
-S:=[
-H31,H32,H33,H34
-];
+X31:=sub<GLeftRight|[0,1,2,0],[1,1,1,2],[1,0,0,2]>; /* 3.3.0.1, 3.3.0.a.1, MAXIMAL */
+X32:=sub<GLeftRight|[0,1,2,1],[1,2,0,2]>; /* 3.4.0.1, 3.4.0.a.1, MAXIMAL */
+X33:=sub<GLeftRight|[0,1,2,0],[1,0,0,2]>; /* 3.6.0.1, 3.6.0.b.1 */
+X34:=sub<GLeftRight|[2,0,0,2],[1,0,0,2]>; /* 3.12.0.1, 3.12.0.a.1 */
 
-#S eq 4;
+H111:=sub<G11|[3,4,4,2],[3,1,1,8],[6,4,0,5]>; /* 11.55.1.1, 11.55.1.b.1 */
+X111:=sub<GLeftRight|[3,4,4,2],[3,1,1,8],[6+11,4,0,5]>; /* 11.55.1.1, 11.55.1.b.1 */
 
-H111:=sub<GRS|[3,4,4,2],[3,1,1,8],[6+11,4,0,5]>; /* 11.55.1.1, 11.55.1.b.1 */
+LeftGroups:=[X31,X32];
 
-SS:=[H111];
+RightGroups:=[X111];
 
 Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
-
 load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
 
-for i in [1..#S] do
-for j in [1..#SS] do
-print <#S-i+1,#SS-j+1>;
-X3:=sub<GRS|Generators(S[i]),C1,C2,C3>;
-X11:=sub<GRS|Generators(SS[j]),D1,D2,D3>;
-X:=X3 meet X11;
-if GRS![-1,0,0,-1] in X then
+for i in [1..#LeftGroups] do
+for j in [1..#RightGroups] do
+print <#LeftGroups-i,#RightGroups-j>;
+XLeft:=sub<GLeftRight|Generators(LeftGroups[i]),KerLeft1,KerLeft2,KerLeft3>;
+XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>;
+X:=XLeft meet XRight;
+if GLeftRight![-1,0,0,-1] in X then
 g:=GL2Genus(X);
 if g lt 2 then
-print <i,GL2Level(X),Index(GRS,X) eq Index(GRS,X3) * Index(GRS,X11), GL2Genus(X),/* GL2Index(X), GL2CuspCount(X), GL2RationalCuspCount(X), GL2Label(X),*/j>;
+ANSWERS:=ANSWERS join <GL2Label(LeftGroups[i]),GL2Label(RightGroups[j])>;
 end if;
 end if;
 end for;
 end for;
 
+/* level 9*13 */
 
+Left:=9;
+Right:=11;
+
+GLeftRight:=GL(2,Integers(Left*Right));
+
+KerLeft1:=[[1+Left*x,0,0,1] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft2:=[[1,0,0,1+Left*x] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft3:=[[1,Left,0,1],[1,0,Left,1]];
+
+KerRight1:=[[1+Right*x,0,0,1] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight2:=[[1,0,0,1+Right*x] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
+
+X91:=sub<GLeftRight|[0,2,4,0],[1,1,4,5],[1,0,0,2]>; /* 9.9.0.1, 9.9.0.a.1 */
+X92:=sub<GLeftRight|[1,1,0,1],[2,0,0,5],[1,0,0,2]>; /* 9.12.0.1, 9.12.0.a.1 */
+X93:=sub<GLeftRight|[2,0,0,5],[4,2,3,4],[1,0,0,2]>; /* 9.12.0.2, 9.12.0.b.1 */
+X94:=sub<GLeftRight|[2,0,0,5],[1,3,3,1],[0,2,4,0],[1,0,0,2]>; /* 9.18.0.2, 9.18.0.d.1 */
+X95:=sub<GLeftRight|[1,3,0,1],[2,1,1,1],[4,2,0,5]>; /* 9.18.0.1, 9.18.0.a.1 */
+X96:=sub<GLeftRight|[0,2,4,1],[4,3,5,4],[4,5,0,5]>; /* 9.27.0.1, 9.27.0.a.1, MAXIMAL */
+X97:=sub<GLeftRight|[0,4,2,3],[5,1,1,4],[5,3,0,4]>; /* 9.27.0.2, 9.27.0.b.1 */
+X98:=sub<GLeftRight|[1,3,0,1],[5,0,3,2],[1,0,2,2]>; /* 9.36.0.2, 9.36.0.b.1 */
+X99:=sub<GLeftRight|[1,3,0,1],[5,0,3,2],[2,1,0,1]>; /* 9.36.0.1, 9.36.0.a.1 */
+X910:=sub<GLeftRight|[1,3,0,1],[5,0,3,2],[4,2,0,5]>; /* 9.36.0.3, 9.36.0.c.1 */
+X911:=sub<GLeftRight|[2,1,0,5],[1,2,3,2]>; /* 9.36.0.5, 9.36.0.d.2 */
+X912:=sub<GLeftRight|[2,1,0,5],[4,0,3,5]>; /* 9.36.0.6, 9.36.e.1 */
+X913:=sub<GLeftRight|[2,2,0,5],[2,2,3,1]>; /* 9.36.0.4, 9.36.0.d.1 */
+X914:=sub<GLeftRight|[1,3,0,1],[2,2,3,8],[1,2,0,2]>; /* 9.36.0.7, 9.36.0.f.2 */
+X915:=sub<GLeftRight|[1,3,0,1],[2,2,3,8],[2,1,0,1]>; /* 9.36.0.9, 9.36.0.f.1 */
+X916:=sub<GLeftRight|[1,3,0,1],[5,2,3,5],[4,0,0,5]>; /* 9.36.0.8, 9.36.0.g.1 */
+
+LeftGroups:=[X96];
+
+for i in [1..#LeftGroups] do
+for j in [1..#RightGroups] do
+print <#LeftGroups-i,#RightGroups-j>;
+XLeft:=sub<GLeftRight|Generators(LeftGroups[i]),KerLeft1,KerLeft2,KerLeft3>;
+XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>;
+X:=XLeft meet XRight;
+if GLeftRight![-1,0,0,-1] in X then
+g:=GL2Genus(X);
+if g lt 2 then
+ANSWERS:=ANSWERS join <GL2Label(LeftGroups[i]),GL2Label(RightGroups[j])>;
+end if;
+end if;
+end for;
+end for;
+
+ANSWERS;
