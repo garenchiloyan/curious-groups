@@ -1,0 +1,60 @@
+
+ANSWERS:={}; // We will store all of the groups of (11,13) type of genus < 2 in ANSWERS
+
+G11:=GL(2,Integers(11));
+G13:=GL(2,Integers(13));
+
+Left:=11;
+Right:=13;
+
+GLeftRight:=GL(2,Integers(Left*Right));
+
+KerLeft1:=[[1+Left*x,0,0,1] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1]; // we need this for CRT
+KerLeft2:=[[1,0,0,1+Left*x] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1]; // we need this for CRT
+KerLeft3:=[[1,Left,0,1],[1,0,Left,1]]; // we need this for CRT
+
+KerRight1:=[[1+Right*x,0,0,1] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1]; // we need this for CRT
+KerRight2:=[[1,0,0,1+Right*x] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1]; // we need this for CRT
+KerRight3:=[[1,Right,0,1],[1,0,Right,1]]; // we need this for CRT
+
+H111:=sub<G11|[3,4,4,2],[3,1,1,8],[6,4,0,5]>; /* 11.55.1.1, 11.55.1.b.1 */
+X111:=sub<GLeftRight|[3,4,4,2],[3,1,1,8],[6,4,0,5]>; /* 11.55.1.1, 11.55.1.b.1 */
+
+LeftGroups:=[X111];
+
+H131:=sub<G13|[2,0,0,7],[1,0,1,1],[1,0,0,2]>; /* 13.14.0.1, 13.14.0.a.1, MAXIMAL */
+H132:=sub<G13|[3,0,0,9],[4,0,1,10],[1,0,0,2]>; /* 13.28.0.2, 13.28.0.a.2 */
+H133:=sub<G13|[3,0,0,9],[4,0,1,10],[2,0,0,1]>; /* 13.28.0.1, 13.28.0.a.1 */
+H134:=sub<G13|[5,0,0,8],[1,0,1,1],[1,0,0,2]>; /* 13.42.0.2, 13.42.0.a.1 */
+H135:=sub<G13|[5,0,0,8],[1,0,1,1],[2,0,0,1]>; /* 13.42.0.1, 13.42.0.a.2 */
+H136:=sub<G13|[5,0,0,8],[1,0,1,1],[2,0,0,3]>; /* 13.42.0.3, 13.42.0.b.1 */
+
+X131:=sub<GLeftRight|[2,0,0,7],[1,0,1,1],[1,0,0,2]>; /* 13.14.0.1, 13.14.0.a.1, MAXIMAL */
+X132:=sub<GLeftRight|[3,0,0,9],[4,0,1,10],[1,0,0,2]>; /* 13.28.0.2, 13.28.0.a.2 */
+X133:=sub<GLeftRight|[3,0,0,9],[4,0,1,10],[2,0,0,1]>; /* 13.28.0.1, 13.28.0.a.1 */
+X134:=sub<GLeftRight|[5,0,0,8],[1,0,1,1],[1,0,0,2]>; /* 13.42.0.2, 13.42.0.a.1 */
+X135:=sub<GLeftRight|[5,0,0,8],[1,0,1,1],[2,0,0,1]>; /* 13.42.0.1, 13.42.0.a.2 */
+X136:=sub<GLeftRight|[5,0,0,8],[1,0,1,1],[2,0,0,3]>; /* 13.42.0.3, 13.42.0.b.1 */
+
+RightGroups:=[X131];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#LeftGroups] do
+for j in [1..#RightGroups] do
+print <#LeftGroups-i,#RightGroups-j>; // this is a counter
+XLeft:=sub<GLeftRight|Generators(LeftGroups[i]),KerLeft1,KerLeft2,KerLeft3>;
+XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>;
+X:=XLeft meet XRight; // the CRT of XLeft and XRight
+if GLeftRight![-1,0,0,-1] in X then
+g:=GL2Genus(X);
+if g lt 2 then
+ANSWERS:=ANSWERS join <GL2Label(LeftGroups[i]),GL2Label(RightGroups[j])>;
+end if;
+end if;
+end for;
+end for;
+
+ANSWERS; // 0 hits
