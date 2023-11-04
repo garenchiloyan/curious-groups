@@ -1,1 +1,53 @@
 
+G3:=GL(2,Integers(3));
+G9:=GL(2,Integers(9));
+G27:=GL(2,Integers(27));
+
+R:=3;
+S:=11;
+
+GRS:=GL(2,Integers(R*S));
+
+C1:=[[1+R*x,0,0,1] : x in [0..(1+S)] | GCD(1+R*x,R*S) eq 1];
+C2:=[[1,0,0,1+R*x] : x in [0..(1+S)] | GCD(1+R*x,R*S) eq 1];
+C3:=[[1,R,0,1],[1,0,R,1]];
+
+D1:=[[1+S*x,0,0,1] : x in [0..(1+R)] | GCD(1+S*x,R*S) eq 1];
+D2:=[[1,0,0,1+S*x] : x in [0..(1+R)] | GCD(1+S*x,R*S) eq 1];
+D3:=[[1,S,0,1],[1,0,S,1]];
+
+H31:=sub<G3|[0,1,2,0],[1,1,1,2],[1,0,0,2]>; /* 3.3.0.1, 3.3.0.a.1 */
+H32:=sub<G3|[0,1,2,1],[1,2,0,2]>; /* 3.4.0.1, 3.4.0.a.1 */
+H33:=sub<G3|[0,1,2,0],[1,0,0,2]>; /* 3.6.0.1, 3.6.0.b.1 */
+H34:=sub<G3|[2,0,0,2],[1,0,0,2]>; /* 3.12.0.1, 3.12.0.a.1 */
+
+S:=[
+H31,H32,H33,H34
+];
+
+#S eq 4;
+
+H111:=sub<GRS|[3,4,4,2],[3,1,1,8],[6+11,4,0,5]>; /* 11.55.1.1, 11.55.1.b.1 */
+
+SS:=[H111];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#S] do
+for j in [1..#SS] do
+print <#S-i+1,#SS-j+1>;
+X3:=sub<GRS|Generators(S[i]),C1,C2,C3>;
+X11:=sub<GRS|Generators(SS[j]),D1,D2,D3>;
+X:=X3 meet X11;
+if GRS![-1,0,0,-1] in X then
+g:=GL2Genus(X);
+if g lt 2 then
+print <i,GL2Level(X),Index(GRS,X) eq Index(GRS,X3) * Index(GRS,X11), GL2Genus(X),/* GL2Index(X), GL2CuspCount(X), GL2RationalCuspCount(X), GL2Label(X),*/j>;
+end if;
+end if;
+end for;
+end for;
+
+
