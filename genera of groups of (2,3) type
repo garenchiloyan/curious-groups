@@ -1834,55 +1834,352 @@ end for;
 
 
 
-/* elliptic curves */
+/* elliptic curves of level 72 */
 
-/* 8.2.0.1 x 9.12.0.1 is an elliptic curve of rank 1 isomorphic to 576.f4 */
+// FIRST LOAD ZYWINAS CODE, GroupTheory.m and ModularCurves.m
+
+R:=8;
+S:=9;
+
+GRS:=GL(2,Integers(R*S));
+
+C1:=[[1+R*x,0,0,1] : x in [0..(1+S)] | GCD(1+R*x,R*S) eq 1];
+C2:=[[1,0,0,1+R*x] : x in [0..(1+S)] | GCD(1+R*x,R*S) eq 1];
+C3:=[[1,R,0,1],[1,0,R,1]];
+
+X8201:=sub<GRS|[6+8,5,3,7],[6,7,7,4],C1,C2,C3>;
+X8202:=sub<GRS|[5+8,2,1,1],[5,7,7,0],C1,C2,C3>;
+X8601:=sub<GRS|[1,3,6,5],[3,5,4,1],[5,3,2,7],C1,C2,C3>;
+X8604:=sub<GRS|[1,5,6,3+8],[3+8,0,2,7],[7,1,2,7],C1,C2,C3>;
+X8605:=sub<GRS|[3+8,0,2,1],[3+8,6,0,1],[7+8,1,4,7],C1,C2,C3>;
+X8606:=sub<GRS|[3,1,2,7],[3+8,1,4,3],[3,4,4,5],C1,C2,C3>;
+
+D1:=[[1+S*x,0,0,1] : x in [0..(1+R)] | GCD(1+S*x,R*S) eq 1];
+D2:=[[1,0,0,1+S*x] : x in [0..(1+R)] | GCD(1+S*x,R*S) eq 1];
+D3:=[[1,S,0,1],[1,0,S,1]];
+
+X91201:=sub<GRS|[7,0,0,5],[8+9,2,0,5],D1,D2,D3>;
+
+X1:=X8201 meet X91201;
+X2:=X8202 meet X91201;
+X3:=X8601 meet X91201;
+X4:=X8604 meet X91201;
+X5:=X8605 meet X91201;
+X6:=X8606 meet X91201;
+
+S:=[X1,X2,X3,X4,X5,X6];
+
+for s in S do
+M:=CreateModularCurveRec(72,Generators(s));
+FindModelOfXG(M,1);
+end for;
 
 
-QQ:=Rationals();
-FF1<t>:=FunctionField(QQ);
+/* proving that 8.6.0.1 x 9.12.0.1 has no proper arithmetically admissible subgroups of genus < 2 */
 
-/* P = 3 j */
-g1:=((t+3)^3)*(t+27)/t;
-g2:=t*(t^2+9*t+27);
-jP:=Evaluate(g1,g2);
-NumP:=Numerator(jP);
-DenP:=Denominator(jP);
-cP:=jP/(NumP / DenP);
-cPNum:=Numerator(cP);
-cPDen:=Denominator(cP);
+/* investigating subgroups of <8.6.0.1, 9.12.0.1> of genus < 2 */
 
-FF2<s>:=FunctionField(QQ);
-j2:=(-2*s^2+1728)/1;
-Num2:=Numerator(j2);
-Den2:=Denominator(j2);
-c2:=j2/(Num2 / Den2);
-c2Num:=Numerator(c2);
-c2Den:=Denominator(c2);
+CANDIDATES:={};
 
-PP<s,t,z>:=ProjectiveSpace(QQ,2);
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
 
-NumP:=Evaluate(Numerator(jP),t);
-DenP:=Evaluate(Denominator(jP),t);
-NumP:=Integers()!cPNum*Homogenization(NumP,z)*z^Max(0,Degree(Denominator(jP))-Degree(Numerator(jP)));
-DenP:=Integers()!cPDen*Homogenization(DenP,z)*z^Max(0,Degree(Numerator(jP))-Degree(Denominator(jP)));
+N:=72;
+TOT:=Exponent(UnitGroup(Integers(N)));
+GN:=GL(2,Integers(N));
 
-Num2:=Evaluate(Numerator(j2),s);
-Den2:=Evaluate(Denominator(j2),s);
-Num2:=Integers()!c2Num*Homogenization(Num2,z)*z^Max(0,Degree(Denominator(j2))-Degree(Numerator(j2)));
-Den2:=Integers()!c2Den*Homogenization(Den2,z)*z^Max(0,Degree(Numerator(j2))-Degree(Denominator(j2)));
+GENS:=[[1,4,0,1],[17,0,0,1],[25,0,0,1],[59,0,0,1],[5,14,0,1],[11,0,0,11],[1,2,0,5],[1,0,0,17],[16,11,45,2]];
+X:=sub<GN|GENS>;
 
-f1:=NumP*Den2;
-f2:=Num2*DenP;
-f:=f1-f2;
+SX:=X meet SL(2,Integers(N));
+SS:=[s`subgroup : s in Subgroups(SX)];
+SS:=[s:s in SS | GN![-1,0,0,-1] in s];
 
-IsHomogeneous(f);
-IsIrreducible(f);
-Factorization(f);
-ff:=Factorization(f)[2][1];
-ff;
+SXList:={};
 
-CC:=Curve(PP,ff);
-Genus(CC) eq 1;
-E,Phi:=EllipticCurve(CC,RationalPoints(CC)[1]);
-CremonaReference(E);
+for i in [1..#SS] do
+#SS-i+1;
+if GL2Genus(SS[i]) lt 2 then
+SXList:=SXList join {SS[i]};
+end if;
+end for;
+
+SXList:=[s:s in SXList];
+#SXList;
+// 1 set in SXList
+
+SLsub1:=SXList[1];
+
+/* work with SLsub1 indices 2, 4 */
+
+/* SLsub1 and index 4 */
+
+Slist0 := [s`subgroup : s in Subgroups(X : IndexEqual := 4)];
+
+list1:={};
+for i0 in [1..#Slist0] do
+if #{Determinant(x) : x in Slist0[i0]} eq EulerPhi(N) then
+list1:=list1 join {Slist0[i0]};
+end if;
+end for;
+Slist1:=[s:s in Slist0 | s in list1];
+
+if #list1 gt 0 then
+list2:={};
+for i1 in [1..#Slist1] do
+if <-1,0> in {<Determinant(g),Trace(g)> : g in Slist1[i1]} then
+list2:=list2 join {Slist1[i1]};
+end if;
+end for;
+Slist2:=[s : s in Slist1 | s in list2];
+end if;
+
+if #list1 gt 0 then
+if #list2 gt 0 then
+list3:={};
+for i2 in [1..#Slist2] do
+if SX meet Slist2[i2] eq SLsub1 then
+list3:=list3 join {Slist2[i2]};
+end if;
+end for;
+end if;
+end if;
+Slist3:=[x:x in list3];
+
+/*
+list4:={};
+if #list2 gt 0 then
+if #list3 gt 0 then
+list4:={Slist3[#Slist3]};
+for i3 in [1..#Slist3-1] do;
+CONJ:=false;
+for j in [i3+1..#Slist3] do;
+if IsConjugate(GN,Slist3[i3],Slist3[j]) then
+CONJ:=true;
+break;
+end if;
+if CONJ eq false then
+list4:=list4 join {Slist3[i3]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs in list4];
+end if;
+end if;
+*/
+
+for x in Slist3 do
+CANDIDATES:=CANDIDATES join {x};
+end for;
+
+/* SLsub1 and index 2 */
+
+Slist0 := [s`subgroup : s in Subgroups(X : IndexEqual := 2)];
+
+list1:={};
+for i0 in [1..#Slist0] do
+if #{Determinant(x) : x in Slist0[i0]} eq EulerPhi(N) then
+list1:=list1 join {Slist0[i0]};
+end if;
+end for;
+Slist1:=[s:s in Slist0 | s in list1];
+
+if #list1 gt 0 then
+list2:={};
+for i1 in [1..#Slist1] do
+if <-1,0> in {<Determinant(g),Trace(g)> : g in Slist1[i1]} then
+list2:=list2 join {Slist1[i1]};
+end if;
+end for;
+Slist2:=[s : s in Slist1 | s in list2];
+end if;
+
+if #list2 gt 0 then
+list3:={};
+for i2 in [1..#Slist2] do
+if SX meet Slist2[i2] eq SLsub1 then
+list3:=list3 join {Slist2[i2]};
+end if;
+end for;
+Slist3:=[x : x in list3];
+end if;
+
+/*
+if #list3 gt 0 then
+list4:={Slist3[#Slist3]};
+for i3 in [1..#Slist3-1] do;
+CONJ:=false;
+for j in [i3+1..#Slist3] do;
+if IsConjugate(GN,Slist3[i3],Slist3[j]) then
+CONJ:=true;
+break;
+end if;
+if CONJ eq false then
+list4:=list4 join {Slist3[i3]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs in list4];
+end if;
+*/
+
+for x in Slist3 do
+CANDIDATES:=CANDIDATES join {x};
+end for;
+
+/* NO GROUPS DONE THIS EXAMPLE IS NOT CURIOUS */
+
+
+/* proving that 8.6.0.6 x 9.12.0.1 has no proper arithmetically admissible subgroups of genus < 2 */
+
+
+CANDIDATES:={};
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+N:=72;
+TOT:=Exponent(UnitGroup(Integers(N)));
+GN:=GL(2,Integers(N));
+
+GENS:=[[17,0,0,1],[11,1,0,1],[47,26,0,1],[1,1,0,11],[49,0,0,1],[1,12,0,49],[1,22,0,1],
+[1,64,0,1],[1,48,0,1],[55,18,0,55],[19,36,18,19],[1,36,0,1],[1,0,36,1],[37,0,0,37]];
+X:=sub<GN|GENS>;
+
+SX:=X meet SL(2,Integers(N));
+SS:=[s`subgroup : s in Subgroups(SX)];
+SS:=[s:s in SS | GN![-1,0,0,-1] in s];
+
+SXList:={};
+
+for i in [1..#SS] do
+#SS-i+1;
+if GL2Genus(SS[i]) lt 2 then
+SXList:=SXList join {SS[i]};
+end if;
+end for;
+
+SXList:=[s:s in SXList];
+#SXList;
+// 1 set in SXList
+
+SLsub1:=SXList[1];
+
+/* work with SLsub1 indices 2, 4 */
+
+/* SLsub1 and index 4 */
+
+Slist0 := [s`subgroup : s in Subgroups(X : IndexEqual := 4)];
+
+list1:={};
+for i0 in [1..#Slist0] do
+if #{Determinant(x) : x in Slist0[i0]} eq EulerPhi(N) then
+list1:=list1 join {Slist0[i0]};
+end if;
+end for;
+Slist1:=[s:s in Slist0 | s in list1];
+
+if #list1 gt 0 then
+list2:={};
+for i1 in [1..#Slist1] do
+if <-1,0> in {<Determinant(g),Trace(g)> : g in Slist1[i1]} then
+list2:=list2 join {Slist1[i1]};
+end if;
+end for;
+Slist2:=[s : s in Slist1 | s in list2];
+end if;
+
+if #list1 gt 0 then
+if #list2 gt 0 then
+list3:={};
+for i2 in [1..#Slist2] do
+if SX meet Slist2[i2] eq SLsub1 then
+list3:=list3 join {Slist2[i2]};
+end if;
+end for;
+end if;
+end if;
+Slist3:=[x:x in list3];
+
+/*
+list4:={};
+if #list2 gt 0 then
+if #list3 gt 0 then
+list4:={Slist3[#Slist3]};
+for i3 in [1..#Slist3-1] do;
+CONJ:=false;
+for j in [i3+1..#Slist3] do;
+if IsConjugate(GN,Slist3[i3],Slist3[j]) then
+CONJ:=true;
+break;
+end if;
+if CONJ eq false then
+list4:=list4 join {Slist3[i3]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs in list4];
+end if;
+end if;
+*/
+
+for x in Slist3 do
+CANDIDATES:=CANDIDATES join {x};
+end for;
+
+/* SLsub1 and index 2 */
+
+Slist0 := [s`subgroup : s in Subgroups(X : IndexEqual := 2)];
+
+list1:={};
+for i0 in [1..#Slist0] do
+if #{Determinant(x) : x in Slist0[i0]} eq EulerPhi(N) then
+list1:=list1 join {Slist0[i0]};
+end if;
+end for;
+Slist1:=[s:s in Slist0 | s in list1];
+
+if #list1 gt 0 then
+list2:={};
+for i1 in [1..#Slist1] do
+if <-1,0> in {<Determinant(g),Trace(g)> : g in Slist1[i1]} then
+list2:=list2 join {Slist1[i1]};
+end if;
+end for;
+Slist2:=[s : s in Slist1 | s in list2];
+end if;
+
+if #list2 gt 0 then
+list3:={};
+for i2 in [1..#Slist2] do
+if SX meet Slist2[i2] eq SLsub1 then
+list3:=list3 join {Slist2[i2]};
+end if;
+end for;
+Slist3:=[x : x in list3];
+end if;
+
+/*
+if #list3 gt 0 then
+list4:={Slist3[#Slist3]};
+for i3 in [1..#Slist3-1] do;
+CONJ:=false;
+for j in [i3+1..#Slist3] do;
+if IsConjugate(GN,Slist3[i3],Slist3[j]) then
+CONJ:=true;
+break;
+end if;
+if CONJ eq false then
+list4:=list4 join {Slist3[i3]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs in list4];
+end if;
+*/
+
+for x in Slist3 do
+CANDIDATES:=CANDIDATES join {x};
+end for;
+
+/* NO GROUPS DONE THIS EXAMPLE IS NOT CURIOUS */
