@@ -15,7 +15,7 @@ https://arxiv.org/abs/1605.03988
 
 take their direct products using the Chinese remainder theorem and then compute their genus. If the genus is less than 2, we make a record of the groups. Note that the genera of all direct products of pairs of groups from the Sutherland--Zywina database of (p,q) type with p > 3 is greater than 1
 
-In the file, genera of groups of (2,13) type, we compute the genera of groups of level 16*13 and 8*13. We leave the rest of the groups of level 4*13 and 2*13 to be looked up in the LMFDB. There are five groups of level 8*13 of genus 1 to study and we use code from Zywina to compute the associated elliptic curves
+In the file, genera of groups of (2,13) type, we compute the genera of groups of level 16*13 and 8*13. We leave the rest of the groups of level 4*13 and 2*13 to be looked up in the LMFDB. There are six groups of level 8*13 of genus 1 to study and we use code from Zywina to compute the associated elliptic curves. The first group HH generates an elliptic curve of rank 0 and the remaining five generate elliptic curves of rank 1
 
 In the file, genera of groups of (2,11) type, we compute the genera of groups of level 8*11, 4*11, and 2*11. All such groups have genus > 1
 
@@ -25,4 +25,4 @@ In the file, genera of groups of (2,5) type, we compute the genera of groups of 
 
 In the file, genera of groups of (2,3) type, we compute the genera of groups of level 2^M * 3^N where M is at most 4 and N is at most 3. Where it says /* elliptic curves of level 72 */, we compute the models of six groups of level 72 and genus 1 using code from Zywina.
 
-Finally, we need to prove that the groups 8.6.0.1 x 9.12.0.1 and 8.6.0.6 x 9.12.0.1 are not curious by proving that they do not contain any proper, arithmetically admissible subgroups of genus less than 2
+Finally, we need to prove that the groups H := 8.6.0.1 x 9.12.0.1 and 8.6.0.6 x 9.12.0.1 are not curious by proving that they do not contain any proper, arithmetically admissible subgroups of genus less than 2. This is done by first analyzing what the subgroups of the intersection of SL(2,Z/72Z) and H are of genus 1. We then see that there are no proper, arithmetically admissible subgroups D of H such that the subgroup of D of matrices of determinant 1 is equal to those aforementioned subgroups of the intersection of H and SL(2,Z/72Z) of genus 1
