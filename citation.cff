@@ -1,1 +1,6 @@
-Garen Chiloyan, Curious Subgroups of GL(2,Z/NZ), (2023), GitHub repository, https://github.com/garenchiloyan/curious-groups
+@software{Curious_Groups,
+  author = {Chiloyan, Garen},
+  title = {{Software for curious groups}},
+  url = {https://github.com/garenchiloyan/curious-groups},
+  year = {2023}
+}
