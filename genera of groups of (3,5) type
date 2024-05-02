@@ -88,7 +88,7 @@ XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>
 X:=XLeft meet XRight;
 if GLeftRight![-1,0,0,-1] in X then
 if GL2Genus(X) lt 2 then
-ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight)>};
+ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
 end if;
 end if;
 end for;
@@ -138,7 +138,7 @@ XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>
 X:=XLeft meet XRight;
 if GLeftRight![-1,0,0,-1] in X then
 if GL2Genus(X) lt 2 then
-ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight)>};
+ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
 end if;
 end if;
 end for;
@@ -177,7 +177,7 @@ XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>
 X:=XLeft meet XRight;
 if GLeftRight![-1,0,0,-1] in X then
 if GL2Genus(X) lt 2 then
-ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight)>};
+ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
 end if;
 end if;
 end for;
