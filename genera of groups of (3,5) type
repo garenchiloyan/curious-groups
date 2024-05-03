@@ -211,3 +211,5 @@ IsConjugate(G15,A7,ANSWERS[7][3]); // true
 IsConjugate(G15,A8,ANSWERS[8][3]); // true
 IsConjugate(G15,A9,ANSWERS[9][3]); // true
 
+A2 subset A7; // true
+A8 subset A7; // true
