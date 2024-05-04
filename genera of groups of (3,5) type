@@ -213,3 +213,125 @@ IsConjugate(G15,A9,ANSWERS[9][3]); // true
 
 A2 subset A7; // true
 A8 subset A7; // true
+
+
+// here we check that no proper subgroup of 15.30.1.1 or 15.45.1.1 has genus < 2
+
+// 15.30.1.1
+
+N:=15;
+G:=GL(2,Integers(N));
+
+X:=A5;
+
+S:=Subgroups(X);
+Slist0:=[s`subgroup : s in S];
+
+Slist1:=[s:s in Slist0 | G![-1,0,0,-1] in s];
+
+#Slist1;
+
+Slist2:=[s:s in Slist1 | #{Determinant(x) : x in s} eq EulerPhi(N)];
+
+#Slist2;
+
+Slist3:={};
+
+for s in Slist2 do
+DetTra:={<Determinant(g),Trace(g)> : g in s};
+if <-1,0> in DetTra then
+Slist3:=Slist3 join {s};
+end if;
+end for;
+
+Slist3:=[s : s in Slist3];
+
+nolist:={};
+for i in [1..#Slist3-1] do;
+for j in [i+1..#Slist3] do;
+if IsConjugate(G,Slist0[i],Slist0[j]) then
+nolist:=nolist join {Slist0[j]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs notin nolist];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#Slist4] do
+if GL2Genus(Slist4[i]) lt 2 then
+<i,GL2Level(Slist4[i]), GL2Genus(Slist4[i]), GL2Index(Slist4[i])>;
+end if;
+end for; // only one hit
+
+// 15.45.1.1
+
+N:=15;
+G:=GL(2,Integers(N));
+
+X:=A9;
+
+S:=Subgroups(X);
+Slist0:=[s`subgroup : s in S];
+
+Slist1:=[s:s in Slist0 | G![-1,0,0,-1] in s];
+
+#Slist1;
+
+Slist2:=[s:s in Slist1 | #{Determinant(x) : x in s} eq EulerPhi(N)];
+
+#Slist2;
+
+Slist3:={};
+
+for s in Slist2 do
+DetTra:={<Determinant(g),Trace(g)> : g in s};
+if <-1,0> in DetTra then
+Slist3:=Slist3 join {s};
+end if;
+end for;
+
+Slist3:=[s : s in Slist3];
+
+nolist:={};
+for i in [1..#Slist3-1] do;
+for j in [i+1..#Slist3] do;
+if IsConjugate(G,Slist0[i],Slist0[j]) then
+nolist:=nolist join {Slist0[j]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs notin nolist];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#Slist4] do
+if GL2Genus(Slist4[i]) lt 2 then
+<i,GL2Level(Slist4[i]), GL2Genus(Slist4[i]), GL2Index(Slist4[i])>;
+end if;
+end for; // only one hit
+
+// here we check that 15.20.1.1 and 15.36.1.1 generate elliptic curve of finite rank
+
+load "/users/garenchiloyan/Desktop/GL2GroupTheory.m";
+load "/users/garenchiloyan/Desktop/ModularCurves.m";
+
+X:=A4;
+GENS:=[x: x in Generators(X)];
+ModCurRec:=CreateModularCurveRec(15,GENS);
+Y:=FindModelOfXG(ModCurRec,1);
+Y; // EllipticCurve([0,1,1,2,4]);
+E:=EllipticCurve([0,1,1,2,4]);
+Rank(E) eq 0; // true
+
+X:=A1;
+GENS:=[x: x in Generators(X)];
+ModCurRec:=CreateModularCurveRec(15,GENS);
+Y:=FindModelOfXG(ModCurRec,1);
+Y; // EllipticCurve([1,1,1,-5,2]);
+E:=EllipticCurve([1,1,1,-5,2]);
+Rank(E) eq 0; // true
