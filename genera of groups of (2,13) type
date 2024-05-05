@@ -263,7 +263,7 @@ end if;
 end for;
 end for;
 
-
+// no hits
 
 
 
@@ -416,8 +416,6 @@ J5:=sub<GRS|[5,0,0,8+13],[1,0,1,1],[2+13,0,0,1],D1,D2,D3>; /* 13.42.0.1, 13.42.0
 J6:=sub<GRS|[5,0,0,8+13],[1,0,1,1],[2+13,0,0,3],D1,D2,D3>; /* 13.42.0.3, 13.42.0.b.1 */
 
 SS:=[J1,J2,J3,J4,J5,J6];
-
-/* SS:=[J1]; */
 
 Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
 load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
