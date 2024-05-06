@@ -16,21 +16,6 @@ load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m"
 Left:=2;
 Right:=11;
 
-/* #1.) 2.2.0.a.1, MAXIMAL */ H21:=sub<G2|[0,1,1,1]>;
-/* #2.) 2.3.0.a.1, MAXIMAL */ H22:=sub<G2|[0,1,1,0]>;
-/* #3.) 2.2.0.a.1 */ H23:=sub<G2|[]>;
-
-H111:=sub<G11|[3,4,4,2],[3,1,1,8],[6,4,0,5]>; /* 11.55.1.1, 11.55.1.b.1 */
-
-ANSWERSLeft:={GL2Label(G2)};
-ANSWERS:={};
-
-pSET:=[H111];
-
-for group in pSET do
-ANSWERS:=ANSWERS join {<GL2Label(G2),GL2Label(group)>};
-end for;
-
 GLeftRight:=GL(2,Integers(Left*Right));
 
 /* #1.) 2.2.0.a.1, MAXIMAL */ X21:=sub<G2|[0,1,1,1]>;
@@ -59,8 +44,7 @@ X:=XLeft meet XRight;
 if GLeftRight![-1,0,0,-1] in X then
 g:=GL2Genus(X);
 if g lt 2 then
-ANSWERSLeft:=ANSWERSLeft join {GL2Label(XLeft)};
-ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight)>};
+ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
 end if;
 end if;
 end for;
@@ -109,6 +93,10 @@ GLeftRight:=GL(2,Integers(Left*Right));
 
 LeftGroups:=[X41,X42];
 
+X111:=sub<GLeftRight|[3,4,4,2+11],[3,1,1,8],[6+11,4,0,5]>; /* 11.55.1.1, 11.55.1.b.1 */
+
+RightGroups:=[X111];
+
 KerLeft1:=[[1+Left*x,0,0,1] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
 KerLeft2:=[[1,0,0,1+Left*x] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
 KerLeft3:=[[1,Left,0,1],[1,0,Left,1]];
@@ -118,28 +106,18 @@ KerRight2:=[[1,0,0,1+Right*x] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) e
 KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
 
 for i in [1..#LeftGroups] do
-RedNLeft:=2^Valuation(GL2Level(LeftGroups[i]),2);
-RedLeft:=sub<GL(2,Integers(Integers()!(RedNLeft/2)))|Generators(LeftGroups[i])>;
-if GL2Label(RedLeft) in ANSWERSLeft then
 for j in [1..#RightGroups] do
 print <#LeftGroups-i,#RightGroups-j>;
 XLeft:=sub<GLeftRight|Generators(LeftGroups[i]),KerLeft1,KerLeft2,KerLeft3>;
 XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>;
-if <GL2Label(RedLeft),GL2Label(XRight)> in ANSWERS then
 X:=XLeft meet XRight;
 if GLeftRight![-1,0,0,-1] in X then
-g:=GL2Genus(X);
-if g lt 2 then
-ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight)>};
-ANSWERSLeft:=ANSWERSLeft join {GL2Label(XLeft)};
-end if;
+if GL2Genus(X) lt 2 then
+ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
 end if;
 end if;
 end for;
-end if;
 end for;
-
-ANSWERS;
 
 /* level 8*11 */
 
@@ -337,6 +315,9 @@ GLeftRight:=GL(2,Integers(Left*Right));
 /* #93.) 8.48.0.q.2 */ X893:=sub<GLeftRight|[3,4,0,7],[5,4,2,3],[5,7,0,3]>;
 
 LeftGroups:=[X81,X82];
+
+X111:=sub<GLeftRight|[3,4,4,2+11],[3,1,1,8],[6+11,4,0,5]>; /* 11.55.1.1, 11.55.1.b.1 */
+
 RightGroups:=[X111];
 
 KerLeft1:=[[1+Left*x,0,0,1] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
@@ -348,25 +329,17 @@ KerRight2:=[[1,0,0,1+Right*x] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) e
 KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
 
 for i in [1..#LeftGroups] do
-RedNLeft:=2^Valuation(GL2Level(LeftGroups[i]),2);
-RedLeft:=sub<GL(2,Integers(Integers()!(RedNLeft/2)))|Generators(LeftGroups[i])>;
-if GL2Label(RedLeft) in ANSWERSLeft then
 for j in [1..#RightGroups] do
 print <#LeftGroups-i,#RightGroups-j>;
 XLeft:=sub<GLeftRight|Generators(LeftGroups[i]),KerLeft1,KerLeft2,KerLeft3>;
 XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>;
-if <GL2Label(RedLeft),GL2Label(XRight)> in ANSWERS then
 X:=XLeft meet XRight;
 if GLeftRight![-1,0,0,-1] in X then
-g:=GL2Genus(X);
-if g lt 2 then
-ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight)>};
-ANSWERSLeft:=ANSWERSLeft join {GL2Label(XLeft)};
-end if;
+if GL2Genus(X) lt 2 then
+ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
 end if;
 end if;
 end for;
-end if;
 end for;
 
 ANSWERS;
