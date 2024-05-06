@@ -1,4 +1,6 @@
 
+ANSWERS:={};
+
 G2:=GL(2,Integers(2));
 G4:=GL(2,Integers(4));
 G8:=GL(2,Integers(8));
