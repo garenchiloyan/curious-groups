@@ -614,20 +614,6 @@ H56:=sub<G5|[2,1,0,3],[2,0,2,3],[1,0,2,2]>;
 H57:=sub<G5|[3,1,0,2],[2,1,0,1]>;
 H58:=sub<G5|[3,1,0,2],[2,1,3,3]>;
 H59:=sub<G5|[4,0,0,4],[2,0,0,1]>;
-H251:=sub<G25|[2,2,0,13],[4,1,3,1],[2,3,0,6]>; /* 25.30.0.1, 25.30.0.a.1 */
-H252:=sub<G25|[9,10,0,14],[0,7,7,2],[2,8,0,1]>; /* 25.60.0.1, 25.60.0.a.1 */
-H253:=sub<G25|[9,10,0,14],[0,7,7,2],[4,1,0,7]>; /* 25.60.0.2, 25.60.0.a.2 */
-
-ANSWERSLeft:={GL2Label(G2)};
-ANSWERSRight:={GL2Label(G5)};
-ANSWERS:={};
-REALANSWERS:={};
-
-pSET:=[H51,H52,H53,H54,H55,H56,H57,H58,H59,H251,H252,H253];
-
-for group in pSET do
-ANSWERS:=ANSWERS join {<GL2Label(G2),GL2Label(group)>};
-end for;
 
 GLeftRight:=GL(2,Integers(Left*Right));
 
@@ -665,19 +651,32 @@ X:=XLeft meet XRight;
 if GLeftRight![-1,0,0,-1] in X then
 g:=GL2Genus(X);
 if g lt 2 then
-ANSWERSLeft:=ANSWERSLeft join {GL2Label(XLeft)};
-ANSWERSRight:=ANSWERSRight join {GL2Label(XRight)};
-ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight)>};
+ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
 end if;
 end if;
 end for;
 end for;
 
-for x in ANSWERS do
-if not x[1] eq GL2Label(G2) then
-REALANSWERS:=REALANSWERS join {x};
-end if;
-end for;
+#ANSWERS; // 14 hits
+
+// results
+
+/*
+10.72.1.3
+10.36.1.1
+10.24.1.3
+10.30.1.1
+10.12.1.1
+10.36.0.1
+10.18.0.1
+10.36.0.2
+10.20.1.1
+10.24.1.2
+10.10.0.1
+10.45.1.1
+10.15.1.1
+10.72.1.2
+*/
 
 /* level 4*5 */
 
