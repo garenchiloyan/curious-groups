@@ -700,6 +700,25 @@ M:=CreateModularCurveRec(10,Generators(group));
 FindModelOfXG(M,1);
 end for;
 
+
+/* TRY THIS FOR A3
+QQ:=Rationals();
+
+PP<s,t,z>:=ProjectiveSpace(QQ,2);
+
+f1:=s*z^13*(-2*t^2+1728*z^2);
+f2:=z^2*(s^2+5*s*z+13*z^2)*((s^4+7*s^3*z+20*s^2*z^2+19*s*z^3+z^4)^3);
+f:=f1-f2;
+
+IsHomogeneous(f);
+IsIrreducible(f);
+f:=Factorization(f)[2][1];
+
+CC:=Curve(PP,f);
+E:=EllipticCurve(CC,RationalPoints(CC)[1]);
+CremonaReference(E);
+*/
+
 /* level 4*5 */
 
 Left:=4;
