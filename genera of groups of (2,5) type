@@ -706,8 +706,8 @@ QQ:=Rationals();
 
 PP<s,t,z>:=ProjectiveSpace(QQ,2);
 
-f1:=s*z^13*(-2*t^2+1728*z^2);
-f2:=z^2*(s^2+5*s*z+13*z^2)*((s^4+7*s^3*z+20*s^2*z^2+19*s*z^3+z^4)^3);
+f1:=((s^2-5*z^2)^5)*(t^2+1728*z^2);
+f2:=8000*s^3*(s^2-5*s*z+10*z^2)^3*z^2;
 f:=f1-f2;
 
 IsHomogeneous(f);
