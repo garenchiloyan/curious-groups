@@ -707,12 +707,11 @@ QQ:=Rationals();
 PP<s,t,z>:=ProjectiveSpace(QQ,2);
 
 f1:=((s^2-5*z^2)^5)*(t^2+1728*z^2);
-f2:=8000*s^3*((s^2-5*s*z+10*z^2)^3)*z^2;
+f2:=8000*s^3*(s+z)*((s^2-5*s*z+10*z^2)^3)*z^2;
 f:=f1-f2;
 
 IsHomogeneous(f);
 IsIrreducible(f);
-f:=Factorization(f)[2][1];
 
 CC:=Curve(PP,f);
 E:=EllipticCurve(CC,RationalPoints(CC)[1]);
