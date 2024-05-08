@@ -94,6 +94,8 @@ end if;
 end for;
 end for;
 
+#ANSWERS // 9 hits
+
 /* level 9*5 */
 
 Left:=9;
@@ -144,6 +146,8 @@ end if;
 end for;
 end for;
 
+#ANSWERS // no additional hits
+
 /* level 3*25 */
 
 Left:=3;
@@ -183,7 +187,7 @@ end if;
 end for;
 end for;
 
-ANSWERS;
+#ANSWERS; // no additional hits. Only groups are of level 15
 
 // here we check our nine groups are the ones found in the LMFDB
 
