@@ -94,7 +94,7 @@ end if;
 end for;
 end for;
 
-#ANSWERS // 9 hits
+#ANSWERS; // 9 hits
 
 /* level 9*5 */
 
@@ -146,7 +146,7 @@ end if;
 end for;
 end for;
 
-#ANSWERS // no additional hits
+#ANSWERS; // no additional hits
 
 /* level 3*25 */
 
