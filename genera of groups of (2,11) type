@@ -8,8 +8,6 @@ G16:=GL(2,Integers(16));
 G32:=GL(2,Integers(32));
 G11:=GL(2,Integers(11));
 
-p:=11;
-
 Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
 load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
 
@@ -52,7 +50,7 @@ end if;
 end for;
 end for;
 
-ANSWERS;
+#ANSWERS; // no hits
 
 /* level 4*11 */
 
@@ -120,6 +118,8 @@ end if;
 end if;
 end for;
 end for;
+
+#ANSWERS; // no hits
 
 /* level 8*11 */
 
@@ -344,4 +344,5 @@ end if;
 end for;
 end for;
 
-ANSWERS;
+#ANSWERS; // no hits
+
