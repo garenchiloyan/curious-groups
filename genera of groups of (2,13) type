@@ -662,6 +662,9 @@ FindModelOfXG(M,1); // wait until weight 4 precision 36, EllipticCurve([1,-10])
 E:=EllipticCurve([1,-10]);
 Rank(E) eq 0; // true
 
+// ignore everything below
+
+/*
 
 G104:=GL(2,Integers(104));
 G52:=GL(2,Integers(52));
@@ -710,7 +713,6 @@ A10, EllipticCurve([1,-10]), rank 0
 A11, EllipticCurve([-4,-3]), rank 0
 A12, EllipticCurve([-4,-3]), rank 0
 
-*/
 
 
 
@@ -793,3 +795,4 @@ i;
 end for;
 
 
+*/
