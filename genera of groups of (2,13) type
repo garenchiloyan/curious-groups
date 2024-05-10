@@ -445,6 +445,10 @@ ANSWERS813[2][3] subset ANSWERS813[5][3]; // true
 ANSWERS813[3][3] subset ANSWERS813[6][3]; // true
 ANSWERS813[4][3] subset ANSWERS813[6][3]; // true
 
+A104281a1:=sub<GLeftRight|[1,71,56,103],[19,22,8,57],[29,73,52,47],[33,56,41,31]>;
+A104281b1:=sub<GLeftRight|[57,52,90,95],[59,3,28,19],[65,44,46,15],[94,45,103,87]>;
+IsConjugate(GLeftRight,A104281a1,ANSWERS[6][3]);
+IsConjugate(GLeftRight,A104281b1,ANSWERS[5][3]);
 
 /*
 fiber product of 8.2.0.2 and 13.28.0.1
