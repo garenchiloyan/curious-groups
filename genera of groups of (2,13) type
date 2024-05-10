@@ -266,17 +266,18 @@ end if;
 end for;
 end for;
 
-// no hits
+#ANSWERS; // no hits
 
 
 /* level 8*13 */
+
+ANSWERS813:={};
 
 G2:=GL(2,Integers(2));
 G4:=GL(2,Integers(4));
 G8:=GL(2,Integers(8));
 G16:=GL(2,Integers(16));
 G32:=GL(2,Integers(32));
-
 
 Left:=8;
 Right:=13;
@@ -431,13 +432,15 @@ XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>
 X:=XLeft meet XRight;
 if GLeftRight![-1,0,0,-1] in X then
 if GL2Genus(X) lt 2 then
-ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
+ANSWERS813:=ANSWERS813 join {<GL2Label(XLeft),GL2Label(XRight),X>};
 end if;
 end if;
 end for;
 end for;
 
-// six hits
+#ANSWERS813; // six hits
+
+
 /*
 fiber product of 8.2.0.2 and 13.28.0.1
 [9,0,0,1],[17,0,0,1],[33,0,0,1],[25,52,0,1],[81,26,0,1],[63,52,0,1],[101,91,0,1],[1,13,0,3],[1,0,0,17],[1,0,8,1],[99,91,1,4]
