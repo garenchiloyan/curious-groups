@@ -227,9 +227,7 @@ end if;
 end for;
 end for;
 
-// no hits
-
-
+#ANSWERS; // no hits
 
 /* level 2*7 */
 
@@ -247,7 +245,7 @@ H74:=sub<G7|[6,0,1,6],[3,0,0,1]>; /* 7.24.0.1, 7.24.0.a.1 */
 H75:=sub<G7|[6,0,1,6],[3,0,0,4]>; /* 7.24.0.3, 7.24.0.b.1 */
 H76:=sub<G7|[3,1,4,4],[4,4,1,3],[3,4,0,4]>; /* 7.28.0.1, 7.28.0.a.1 */
 
-ANSWERS:={};
+ANSWERS27:={};
 
 GLeftRight:=GL(2,Integers(Left*Right));
 
@@ -282,14 +280,25 @@ X:=XLeft meet XRight;
 if GLeftRight![-1,0,0,-1] in X then
 g:=GL2Genus(X);
 if g lt 2 then
-ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
+ANSWERS27:=ANSWERS27 join {<GL2Label(XLeft),GL2Label(XRight),X>};
 end if;
 end if;
 end for;
 end for;
 
-#ANSWERS;
-// 5 hits
+#ANSWERS27; // 5 hits
+
+ANSWERS27:=[x:x in ANSWERS27];
+
+ANSWERS27[2][3] subset ANSWERS27[5][3];
+ANSWERS27[3][3] subset ANSWERS27[5][3];
+ANSWERS27[4][3] subset ANSWERS27[5][3];
+
+X14:=sub<GLeftRight|[3,0,0,1],[5,0,0,1],[9,0,0,1],[11,0,0,1],[13,0,0,1],
+[1,0,0,3],[1,0,0,5],[1,0,0,9],[1,0,0,11],[1,0,0,13],[1,1,0,1]>;
+
+IsConjugate(GLeftRight,X14,ANSWERS27[5][3]); // true
+
 /*
 [3,0,0,1],[1,0,0,3],[1,0,2,1],[2,7,1,2],  14.24.1.1, genus 1
 [13,0,0,1],[3,0,0,3],[1,0,2,1],[2,7,1,2], 14.72.1.3, genus 1
