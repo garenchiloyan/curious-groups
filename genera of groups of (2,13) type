@@ -464,6 +464,34 @@ A104561f2 subset A104281a1;
 
 // here we compute equations of the modular curves and ranks of A104281b1, A104281a1, A104561b1, A104561b2, A104561f1, and A104561f2
 
+load "/users/garenchiloyan/Desktop/GL2GroupTheory.m";
+load "/users/garenchiloyan/Desktop/ModularCurves.m";
+
+M:=CreateModularCurveRec(104,[[57,52,90,95],[59,3,28,19],[65,44,46,15],[94,45,103,87]]);
+FindModelOfXG(M,1); // wait until weight 4 precision 101, EllipticCurve([4,-80])
+E:=EllipticCurve([4,-80]);
+Rank(E) eq 0; // true
+
+M:=CreateModularCurveRec(104,[[1,71,56,103],[19,22,8,57],[29,73,52,47],[33,56,41,31]]);
+FindModelOfXG(M,1); // wait until weight 4 precision 101, EllipticCurve([4,80])
+E:=EllipticCurve([4,80]);
+Rank(E) eq 1; // true
+
+M:=CreateModularCurveRec(104,[[73,3,47,0],[80,11,41,58],[96,37,11,83],[97,76,24,97]]);
+FindModelOfXG(M,1); // wait until weight 4 precision 111, EllipticCurve([-16,24])
+E:=EllipticCurve([-16,24]);
+Rank(E) eq 1; // true
+
+M:=CreateModularCurveRec(104,[[35,73,23,102],[62,89,1,91],[72,23,37,86],[79,88,48,39]]);
+FindModelOfXG(M,1); // wait until weight 4 precision 111, EllipticCurve([-16,24])
+
+M:=CreateModularCurveRec(104,[[42,83,9,7],[86,67,49,29],[97,4,101,25]]);
+FindModelOfXG(M,1); // wait until weight 2 precision 31, EllipticCurve([-16,24])
+
+M:=CreateModularCurveRec(104,[[9,103,28,25],[17,46,72,43],[55,5,19,56]]);
+FindModelOfXG(M,1); // wait until weight 2 precision 31, EllipticCurve([-16,24])
+
+
 /*
 fiber product of 8.2.0.2 and 13.28.0.1
 [9,0,0,1],[17,0,0,1],[33,0,0,1],[25,52,0,1],[81,26,0,1],[63,52,0,1],[101,91,0,1],[1,13,0,3],[1,0,0,17],[1,0,8,1],[99,91,1,4]
