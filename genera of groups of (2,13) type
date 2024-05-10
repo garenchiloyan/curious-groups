@@ -439,6 +439,11 @@ end for;
 end for;
 
 #ANSWERS813; // six hits
+ANSWERS813:=[x:x in ANSWERS813];
+ANSWERS813[1][3] subset ANSWERS813[5][3]; // true
+ANSWERS813[2][3] subset ANSWERS813[5][3]; // true
+ANSWERS813[3][3] subset ANSWERS813[6][3]; // true
+ANSWERS813[4][3] subset ANSWERS813[6][3]; // true
 
 
 /*
