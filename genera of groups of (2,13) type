@@ -493,6 +493,8 @@ FindModelOfXG(M,1); // wait until weight 2 precision 31, EllipticCurve([-16,24])
 
 /* level 4*13 */
 
+ANSWERS413:={};
+
 G2:=GL(2,Integers(2));
 G4:=GL(2,Integers(4));
 G8:=GL(2,Integers(8));
@@ -555,17 +557,30 @@ XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>
 X:=XLeft meet XRight;
 if GLeftRight![-1,0,0,-1] in X then
 if GL2Genus(X) lt 2 then
-ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
+ANSWERS413:=ANSWERS413 join {<GL2Label(XLeft),GL2Label(XRight),X>};
 end if;
 end if;
 end for;
 end for;
 
-// three hits
+// three hits, 52.56.1.4, 52.56.1.5, and 52.28.1.1
 
-/*
-52.56.1.4, 52.56.1.5, and 52.28.1.1
-*/
+ANSWERS413:=[x:x in ANSWERS413];
+ANSWERS413[1][3] subset ANSWERS413[3][3]; // true
+ANSWERS413[2][3] subset ANSWERS413[3][3]; // true
+
+A522811:=sub<GLeftRight|[13,31,34,5],[21,49,20,43],[32,51,49,19],[36,29,5,24]>;
+IsConjugate(GLeftRight,A522811,ANSWERS413[3][3]); // true
+
+// here we compute equations of the modular curve and rank of A522811
+
+load "/users/garenchiloyan/Desktop/GL2GroupTheory.m";
+load "/users/garenchiloyan/Desktop/ModularCurves.m";
+
+M:=CreateModularCurveRec(52,[[13,31,34,5],[21,49,20,43],[32,51,49,19],[36,29,5,24]]);
+FindModelOfXG(M,1); // wait until weight 4 precision 111, EllipticCurve([1,10])
+E:=EllipticCurve([1,10]);
+Rank(E) eq 0; // true
 
 G2:=GL(2,Integers(2));
 G4:=GL(2,Integers(4));
@@ -608,8 +623,9 @@ J6:=sub<GLeftRight|[5,0,0,8+13],[1,0,1,1],[2+13,0,0,3],KerRight1,KerRight2,KerRi
 RightGroups:=[J1,J2,J3,J4,J5,J6];
 
 Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
-
 load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+ANSWERS213:={};
 
 for i in [1..#LeftGroups] do
 for j in [1..#RightGroups] do
@@ -619,7 +635,7 @@ XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>
 X:=XLeft meet XRight;
 if GLeftRight![-1,0,0,-1] in X then
 if GL2Genus(X) lt 2 then
-ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
+ANSWERS213:=ANSWERS213 join {<GL2Label(XLeft),GL2Label(XRight),X>};
 end if;
 end if;
 end for;
@@ -628,10 +644,24 @@ end for;
 // three hits
 /* 26.28.1.1, 26.56.1.2, 26.56.1.3 */
 
-ANSWERS:=[x:x in ANSWERS];
+ANSWERS213:=[x:x in ANSWERS213];
+
+ANSWERS213[2][3] subset ANSWERS213[1][3]; // true
+ANSWERS213[3][3] subset ANSWERS213[1][3]; // true
+
+A262811:=sub<GLeftRight|[7,17,23,10],[17,17,17,10],[21,19,1,0]>;
+IsConjugate(GLeftRight,A262811,ANSWERS213[1][3]); // true
+
+// here we check that the rank of A262811 is equal to 0
 
 load "/users/garenchiloyan/Desktop/GL2GroupTheory.m";
 load "/users/garenchiloyan/Desktop/ModularCurves.m";
+
+M:=CreateModularCurveRec(26,[[7,17,23,10],[17,17,17,10],[21,19,1,0]]);
+FindModelOfXG(M,1); // wait until weight 4 precision 36, EllipticCurve([1,-10])
+E:=EllipticCurve([1,-10]);
+Rank(E) eq 0; // true
+
 
 G104:=GL(2,Integers(104));
 G52:=GL(2,Integers(52));
