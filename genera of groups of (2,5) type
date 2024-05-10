@@ -598,6 +598,8 @@ end for;
 
 /* level 2*5 */
 
+ANSWERS25:={};
+
 Left:=2;
 Right:=5;
 
@@ -651,13 +653,13 @@ X:=XLeft meet XRight;
 if GLeftRight![-1,0,0,-1] in X then
 g:=GL2Genus(X);
 if g lt 2 then
-ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
+ANSWERS25:=ANSWERS25 join {<GL2Label(XLeft),GL2Label(XRight),X>};
 end if;
 end if;
 end for;
 end for;
 
-#ANSWERS; // 14 more hits
+#ANSWERS25; // 14 hits
 
 // results
 
