@@ -814,6 +814,43 @@ end for;
 
 ANSWERS45:=[x:x in ANSWERS45];
 
+A1:=sub<GLeftRight|[4,11,9,5],[11,11,18,19],[16,15,7,18]>;
+IsConjugate(GLeftRight,A1,ANSWERS45[18][3]);
+A2:=sub<GLeftRight|[1,16,16,5],[3,4,17,5],[4,5,5,4],[15,18,18,7]>;
+IsConjugate(GLeftRight,A2,ANSWERS45[13][3]);
+A3:=sub<GLeftRight|[3,13,13,2],[8,9,5,12],[8,13,11,17],[11,10,18,19]>;
+IsConjugate(GLeftRight,A3,ANSWERS45[2][3]);
+A4:=sub<GLeftRight|[3,9,12,5],[11,4,1,5],[19,7,11,0]>;
+IsConjugate(GLeftRight,A4,ANSWERS45[12][3]);
+A5:=sub<GLeftRight|[1,16,8,9],[3,7,10,17],[13,5,3,14],[18,13,3,15]>;
+IsConjugate(GLeftRight,A5,ANSWERS45[14][3]);
+A6:=sub<GLeftRight|[2,7,15,1],[10,7,7,18],[16,19,19,2],[19,6,17,15]>;
+IsConjugate(GLeftRight,A6,ANSWERS45[3][3]);
+A7:=sub<GLeftRight|[7,12,12,15],[10,7,7,13],[10,13,13,2],[13,10,19,1]>;
+IsConjugate(GLeftRight,A7,ANSWERS45[15][3]);
+A8:=sub<GLeftRight|[3,12,0,7],[7,1,0,11],[11,10,0,1],[13,5,0,13],[13,16,0,11]>;
+IsConjugate(GLeftRight,A8,ANSWERS45[17][3]);
+A9:=sub<GLeftRight|[13,4,0,19],[13,18,5,11],[17,16,10,13],[19,6,5,7]>;
+IsConjugate(GLeftRight,A9,ANSWERS45[10][3]);
+A10:=sub<GLeftRight|[1,16,9,13],[7,4,13,3],[11,6,3,19],[17,0,3,9]>;
+IsConjugate(GLeftRight,A10,ANSWERS45[11][3]);
+A11:=sub<GLeftRight|[1,0,3,7],[3,8,7,13],[7,18,12,17],[9,0,12,13],[11,10, 5,1]>;
+IsConjugate(GLeftRight,A11,ANSWERS45[6][3]);
+A12:=sub<GLeftRight|[3,13,2,3],[3,17,10,7],[7,0,0,7],[7,0,12,11],[9,2,14,1]>;
+IsConjugate(GLeftRight,A12,ANSWERS45[8][3]);
+A13:=sub<GLeftRight|[9,1,6,13],[9,15,10,9],[19,0,2,3],[19,0,10,19],[19,5,16,1]>;
+IsConjugate(GLeftRight,A13,ANSWERS45[4][3]);
+A14:=sub<GLeftRight|[1,9,0,17],[1,18,0,7],[1,19,0,1],[9,16,0,1],[11,14,0,17]>;
+IsConjugate(GLeftRight,A14,ANSWERS45[1][3]);
+A15:=sub<GLeftRight|[7,1,0,19],[9,6,12,5],[11,9,14,7],[19,11,14,19]>;
+IsConjugate(GLeftRight,A15,ANSWERS45[9][3]);
+A16:=sub<GLeftRight|[3,13,4,17],[3,15,4,1],[11,1,14,11],[11,14,10,19],[13,5,4,11]>;
+IsConjugate(GLeftRight,A16,ANSWERS45[5][3]);
+A17:=sub<GLeftRight|[7,12,0,19],[13,17,0,9],[13,19,0,1],[17,9,0,19],[19,2,0,9]>;
+IsConjugate(GLeftRight,A17,ANSWERS45[7][3]);
+A18:=sub<GLeftRight|[1,13,4,5],[3,7,18,3],[7,11,12,3],[13,5,4,1]>;
+IsConjugate(GLeftRight,A18,ANSWERS45[16][3]);
+
 LABELS45:=[GL2Label(ANSWERS45[i][3]):i in [1..#ANSWERS45]];
 
 load "/users/garenchiloyan/Desktop/GL2GroupTheory.m";
