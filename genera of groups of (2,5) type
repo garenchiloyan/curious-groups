@@ -1172,8 +1172,51 @@ load "/users/garenchiloyan/Desktop/GL2GroupTheory.m";
 load "/users/garenchiloyan/Desktop/ModularCurves.m";
 
 
-M:=CreateModularCurveRec(10,Generators(group));
-FindModelOfXG(M,1);
+M3:=CreateModularCurveRec(40,Generators(A3));
+FindModelOfXG(M3,1); // EllipticCurve([0,1,0,-145,975])
+M4:=CreateModularCurveRec(40,Generators(A4));
+FindModelOfXG(M4,1); // EllipticCurve([0,-1,0,-145,-975]);
+M5:=CreateModularCurveRec(40,Generators(A5));
+FindModelOfXG(M5,1); // no points over QQ
+M6:=CreateModularCurveRec(40,Generators(A6));
+FindModelOfXG(M6,1); // EllipticCurve([0,1,0,367,2863])
+M7:=CreateModularCurveRec(40,Generators(A7));
+FindModelOfXG(M7,1); // EllipticCurve([0,1,0,-165,763])
+M8:=CreateModularCurveRec(40,Generators(A8));
+FindModelOfXG(M8,1); // EllipticCurve([0,-1,0,-165,-763])
+M9:=CreateModularCurveRec(40,Generators(A9));
+FindModelOfXG(M9,1); // EllipticCurve([0,1,0,-165,763])
+M10:=CreateModularCurveRec(40,Generators(A10));
+FindModelOfXG(M10,1); // EllipticCurve([0,-1,0,-165,-763])
+M11:=CreateModularCurveRec(40,Generators(A11));
+FindModelOfXG(M11,1); // EllipticCurve([0,-1,0,15,17])
+M12:=CreateModularCurveRec(40,Generators(A12));
+FindModelOfXG(M12,1); // EllipticCurve([-28,-48])
+M13:=CreateModularCurveRec(40,Generators(A13));
+FindModelOfXG(M13,1); // EllipticCurve([-28,48]);
+M14:=CreateModularCurveRec(40,Generators(A14));
+FindModelOfXG(M14,1); // EllipticCurve([0,1,0,15,-17]);
+M15:=CreateModularCurveRec(40,Generators(A15));
+FindModelOfXG(M15,1); // EllipticCurve([0,1,0,15,-17]);
+M16:=CreateModularCurveRec(40,Generators(A16));
+FindModelOfXG(M16,1); // EllipticCurve([0,-1,0,15,17]);
+M17:=CreateModularCurveRec(40,Generators(A17));
+FindModelOfXG(M17,1); // EllipticCurve([0,1,0,-5,-5])
+M18:=CreateModularCurveRec(40,Generators(A18));
+FindModelOfXG(M18,1); // EllipticCurve([0,-1,0,-5,5])
+M19:=CreateModularCurveRec(40,Generators(A19));
+FindModelOfXG(M19,1); // EllipticCurve([0,-1,0,-5,5])
+M20:=CreateModularCurveRec(40,Generators(A20));
+FindModelOfXG(M20,1); // EllipticCurve([0,1,0,-5,-5])
+M21:=CreateModularCurveRec(40,Generators(A21));
+FindModelOfXG(M21,1); // EllipticCurve([0,1,0,-5,-5])
+M22:=CreateModularCurveRec(40,Generators(A22));
+FindModelOfXG(M22,1); // EllipticCurve([0,-1,0,-5,5])
+M23:=CreateModularCurveRec(40,Generators(A23));
+FindModelOfXG(M23,1); // EllipticCurve([0,-1,0,-5,5])
+M24:=CreateModularCurveRec(40,Generators(A24));
+FindModelOfXG(M24,1); // EllipticCurve([0,1,0,-5,-5])
+
 
 
 /*
