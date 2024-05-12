@@ -5,6 +5,100 @@ G8:=GL(2,Integers(8));
 G16:=GL(2,Integers(16));
 G32:=GL(2,Integers(32));
 
+G3:=GL(2,Integers(3));
+G9:=GL(2,Integers(9));
+G27:=GL(2,Integers(27));
+
+ANSWERS:={};
+
+/* level 2*27 */
+
+Left:=2;
+Right:=27;
+
+GLeftRight:=GL(2,Integers(Left*Right));
+
+KerLeft1:=[[1+Left*x,0,0,1] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft2:=[[1,0,0,1+Left*x] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft3:=[[1,Left,0,1],[1,0,Left,1]];
+
+KerRight1:=[[1+Right*x,0,0,1] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight2:=[[1,0,0,1+Right*x] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
+
+/* #1.) 2.2.0.a.1, MAXIMAL */ H21:=sub<G2|[0,1,1,1]>;
+/* #2.) 2.3.0.a.1, MAXIMAL */ H22:=sub<G2|[0,1,1,0]>;
+/* #3.) 2.2.0.a.1 */ H23:=sub<G2|[]>;
+
+LeftGroups:=[H21,H22];
+
+X271:=sub<GLeftRight|[1,1,0,1],[2,1,9,5],[1,2,3,2+27],KerRight1,KerRight2,KerRight3>;
+
+RightGroups:=[X271];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#LeftGroups] do
+for j in [1..#RightGroups] do
+print <#LeftGroups-i,#RightGroups-j>;
+XLeft:=sub<GLeftRight|Generators(LeftGroups[i]),KerLeft1,KerLeft2,KerLeft3>;
+XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>;
+X:=XLeft meet XRight;
+if GLeftRight![-1,0,0,-1] in X then
+g:=GL2Genus(X);
+if g lt 2 then
+ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
+end if;
+end if;
+end for;
+end for;
+
+#ANSWERS; // no hits
+
+!!!!!!!!
+
+
+GRS:=GL(2,Integers(R*S));
+
+C1:=[[1+R*x,0,0,1] : x in [0..(1+S)] | GCD(1+R*x,R*S) eq 1];
+C2:=[[1,0,0,1+R*x] : x in [0..(1+S)] | GCD(1+R*x,R*S) eq 1];
+C3:=[[1,R,0,1],[1,0,R,1]];
+
+D1:=[[1+S*x,0,0,1] : x in [0..(1+R)] | GCD(1+S*x,R*S) eq 1];
+D2:=[[1,0,0,1+S*x] : x in [0..(1+R)] | GCD(1+S*x,R*S) eq 1];
+D3:=[[1,S,0,1],[1,0,S,1]];
+
+H21:=sub<G2|[0,1,1,1]>; /* 2.2.0.1, 2.2.0.a.1 */
+H22:=sub<G2|[0,1,1,0]>; /* 2.3.0.1, 2.3.0.a.1 */
+H23:=sub<G2|[]>; /* 2.6.0.1, 2.6.0.a.1 */
+
+S:=[
+H21, H22, H23
+];
+
+#S eq 3;
+
+J21:=sub<GRS|[1,1,0,1],[2,1,9,5],[1,2,3,2+27],D1,D2,D3>;
+
+SS:=[
+J21
+];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#S] do
+for j in [1..#SS] do
+X2:=sub<GRS|Generators(S[i]),C1,C2,C3>;
+X3:=sub<GRS|Generators(SS[j]),D1,D2,D3>;
+X:=X2 meet X3;
+print <i,GL2Level(X),Index(GRS,X) eq Index(GRS,X2) * Index(GRS,X3), GL2Genus(X), /* GL2Index(X), GL2CuspCount(X), GL2RationalCuspCount(X), GL2Label(X)*/ j>;
+end for;
+end for;
+
+
+
 /* level 2*3 */
 
 R:=2;
