@@ -131,12 +131,22 @@ end if;
 end for;
 end for;
 
+#ANSWERS; // no hits
+
 /* level 8*27 */
 
 Left:=8;
 Right:=27;
 
 GLeftRight:=GL(2,Integers(Left*Right));
+
+KerLeft1:=[[1+Left*x,0,0,1] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft2:=[[1,0,0,1+Left*x] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft3:=[[1,Left,0,1],[1,0,Left,1]];
+
+KerRight1:=[[1+Right*x,0,0,1] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight2:=[[1,0,0,1+Right*x] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
 
 /* #1.) 8.2.0.a.1, MAXIMAL */ H81:=sub<G8|[6,5,3,7],[6,7,7,4]>;
 /* #2.) 8.2.0.b.1, MXIMAL */ H82:=sub<G8|[5,2,1,1],[5,7,7,0]>;
