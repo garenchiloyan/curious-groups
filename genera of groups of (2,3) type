@@ -622,8 +622,9 @@ end for;
 
 /* level 8*9 */
 
-!!!!!!!!
+ANSWERS89:={};
 
+!!!!!!!!
 
 GRS:=GL(2,Integers(R*S));
 
