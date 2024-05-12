@@ -56,6 +56,82 @@ end for;
 
 #ANSWERS; // no hits
 
+/* level 4*27 */
+
+Left:=4;
+Right:=27;
+
+GLeftRight:=GL(2,Integers(Left*Right));
+
+KerLeft1:=[[1+Left*x,0,0,1] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft2:=[[1,0,0,1+Left*x] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft3:=[[1,Left,0,1],[1,0,Left,1]];
+
+KerRight1:=[[1+Right*x,0,0,1] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight2:=[[1,0,0,1+Right*x] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
+
+H41:=sub<G4|[1,2,0,1],[1,1,1,2],[1,1,0,3]>; /* 4.2.0.1, 4.2.0.a.1 */
+H42:=sub<G4|[1,2,0,1],[3,0,0,3],[1,0,2,1],[1,1,0,3]>; /* 4.6.0.5, 4.6.0.a.1 */ 
+H43:=sub<G4|[1,1,1,2],[0,1,3,0],[1,1,0,3]>; /* 4.4.0.1, 4.4.0.a.1 */
+H44:=sub<G4|[3,0,0,3],[0,1,3,2],[1,0,0,3]>; /* 4.6.0.3, 4.6.0.b.1 */
+H45:=sub<G4|[3,0,0,3],[0,1,3,2],[1,2,0,3]>; /* 4.6.0.1, 4.6.0.c.1 */
+H46:=sub<G4|[1,2,2,1],[0,1,3,0],[1,0,0,3]>; /* 4.6.0.4, 4.6.0.e.1 */
+H47:=sub<G4|[1,2,2,1],[0,1,3,0],[1,2,0,3]>; /* 4.6.0.2, 4.6.0.d.1 */
+H48:=sub<G4|[2,1,1,3],[1,1,0,3]>; /* 4.8.0.2, 4.8.0.b.1 */
+H49:=sub<G4|[3,0,0,3],[1,2,2,1],[0,1,1,0]>; /* 4.12.0.9, 4.12.0.d.1 */
+H410:=sub<G4|[3,0,0,3],[1,2,2,1],[1,0,0,3]>; /* 4.12.0.4, 4.12.0.a.1 */
+
+H411:=sub<G4|[3,0,0,3],[1,2,2,1],[1,2,0,3]>; /* 4.12.0.3, 4.12.0.b.1 */
+H412:=sub<G4|[0,1,3,0],[1,0,0,3]>; /* 4.12.0.11, 4.12.0.f.1 */
+H413:=sub<G4|[0,1,3,0],[2,1,1,2]>; /* 4.12.0.5, 4.12.0.e.1 */
+H414:=sub<G4|[3,0,0,3],[1,0,0,3]>; /* 4.24.0.8, 4.24.0.b.1 */
+H415:=sub<G4|[3,0,0,3],[1,3,0,3]>; /* 4.24.0.2, 4.24.0.c.1 */
+
+X41:=sub<GLeftRight|[1,2,0,1],[1,1,1,2],[1,1,0,3+4]>; /* 4.2.0.1, 4.2.0.a.1 */
+X42:=sub<GLeftRight|[1,2,0,1],[3+4,0,0,3+4],[1,0,2,1],[1,1,0,3+4]>; /* 4.6.0.5, 4.6.0.a.1 */ 
+X43:=sub<GLeftRight|[1,1,1,2],[0,1,3+4,0],[1,1,0,3+4]>; /* 4.4.0.1, 4.4.0.a.1 */
+X44:=sub<GLeftRight|[3+4,0,0,3+4],[0,1,3+4,2],[1,0,0,3+4]>; /* 4.6.0.3, 4.6.0.b.1 */
+X45:=sub<GLeftRight|[3+4,0,0,3+4],[0,1,3+4,2],[1,2,0,3+4]>; /* 4.6.0.1, 4.6.0.c.1 */
+X46:=sub<GLeftRight|[1+4,2,2,1],[0,1,3+4,0],[1,0,0,3+4]>; /* 4.6.0.4, 4.6.0.e.1 */
+X47:=sub<GLeftRight|[1+4,2,2,1],[0,1,3+4,0],[1,2,0,3+4]>; /* 4.6.0.2, 4.6.0.d.1 */
+X48:=sub<GLeftRight|[2,1,1,3],[1,1,0,3+4]>; /* 4.8.0.2, 4.8.0.b.1 */
+X49:=sub<GLeftRight|[3+4,0,0,3+4],[1+4,2,2,1],[0,1,1,0]>; /* 4.12.0.9, 4.12.0.d.1 */
+X410:=sub<GLeftRight|[3+4,0,0,3+4],[1+4,2,2,1],[1,0,0,3+4]>; /* 4.12.0.4, 4.12.0.a.1 */
+
+X411:=sub<GLeftRight|[3+4,0,0,3+4],[1+4,2,2,1],[1,2,0,3+4]>; /* 4.12.0.3, 4.12.0.b.1 */
+X412:=sub<GLeftRight|[0,1,3+4,0],[1,0,0,3+4]>; /* 4.12.0.11, 4.12.0.f.1 */
+X413:=sub<GLeftRight|[0,1,3+4,0],[2,1+4,1,2]>; /* 4.12.0.5, 4.12.0.e.1 */
+X414:=sub<GLeftRight|[3+4,0,0,3+4],[1,0,0,3+4]>; /* 4.24.0.8, 4.24.0.b.1 */
+X415:=sub<GLeftRight|[3+4,0,0,3+4],[1,3,0,3+4]>; /* 4.24.0.2, 4.24.0.c.1 */
+
+LeftGroups:=[
+X41,X43
+];
+
+X271:=sub<GLeftRight|[1,1,0,1],[2,1,9,5],[1,2,3,2+27],KerRight1,KerRight2,KerRight3>;
+
+RightGroups:=[X271];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#LeftGroups] do
+for j in [1..#RightGroups] do
+print <#LeftGroups-i,#RightGroups-j>;
+XLeft:=sub<GLeftRight|Generators(LeftGroups[i]),KerLeft1,KerLeft2,KerLeft3>;
+XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>;
+X:=XLeft meet XRight;
+if GLeftRight![-1,0,0,-1] in X then
+g:=GL2Genus(X);
+if g lt 2 then
+ANSWERS:=ANSWERS join {<GL2Label(XLeft),GL2Label(XRight),X>};
+end if;
+end if;
+end for;
+end for;
+
+
 !!!!!!!!
 
 
