@@ -813,13 +813,13 @@ FindModelOfXG(M2,1); // EllipticCurve([0,-8]), rank 0
 M3:=CreateModularCurveRec(72,Generators(A3));
 FindModelOfXG(M3,1); // EllipticCurve([0,216]), rank 0
 M4:=CreateModularCurveRec(72,Generators(A4));
-FindModelOfXG(M4,1); // ???
+FindModelOfXG(M4,1); // genus 0
 M5:=CreateModularCurveRec(72,Generators(A5));
 FindModelOfXG(M5,1); // EllipticCurve([0,-8]), rank 0
 M6:=CreateModularCurveRec(72,Generators(A6));
 FindModelOfXG(M6,1); // EllipticCurve([0,8]), rank 0
 M7:=CreateModularCurveRec(72,Generators(A7));
-FindModelOfXG(M7,1); // ???
+FindModelOfXG(M7,1); // genus 0
 M8:=CreateModularCurveRec(72,Generators(A8));
 FindModelOfXG(M8,1); // EllipticCurve([0,8]), rank 0
 
