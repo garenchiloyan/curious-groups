@@ -1490,7 +1490,7 @@ A47:=sub<GLeftRight|[13,12,12,19],[15,2,22,15],[15,7,20,15],[17,23,4,23],[21,17,
 IsConjugate(GLeftRight,A47,ANSWERS83[47][3]);
 A48:=sub<GLeftRight|[1,8,0,17],[1,8,0,23],[7,21,6,7],[17,18,6,23],[23,0,12,17]>; // 24.72.1.1
 IsConjugate(GLeftRight,A48,ANSWERS83[48][3]);
-A49:=sub<GLeftRight|[8,7,11,8],[9,11,23,6],[16,11,19,1],[21,5,20,3]>; // 24.6.1.2
+A49:=sub<GLeftRight|[5,20,6,13],[7,22,21,7],[10,7,9,14],[17,12,0,7]>; // 24.8.0.10
 IsConjugate(GLeftRight,A49,ANSWERS83[49][3]);
 A50:=sub<GLeftRight|[11,3,6,23],[13,15,10,5],[13,18,10,7],[19,12,4,11],[23,21,18,11]>; // 24.48.1.74
 IsConjugate(GLeftRight,A50,ANSWERS83[50][3]);
@@ -1503,7 +1503,7 @@ IsConjugate(GLeftRight,A53,ANSWERS83[53][3]);
 A54:=sub<GLeftRight|[3,1,4,3],[11,3,6,23],[12,19,17,3],[22,3,21,1]>; // 24.12.1.3
 IsConjugate(GLeftRight,A54,ANSWERS83[54][3]);
 A55:=sub<GLeftRight|[11,6,9,11],[11,18,18,1],[20,9,3,14],[23,6,9,7]>; // 24.24.1.2
-IsConjugate(GLeftRight,A55,ANSWERS8355][3]);
+IsConjugate(GLeftRight,A55,ANSWERS83[55][3]);
 
 
 
