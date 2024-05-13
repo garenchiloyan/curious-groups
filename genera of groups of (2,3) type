@@ -1602,9 +1602,168 @@ FindModelOfXG(M54,1); // EllipticCurve([-540,-4752]), rank 1
 M55:=CreateModularCurveRec(24,Generators(A55));
 FindModelOfXG(M55,1); // EllipticCurve([0,-216]), rank 1
 
+
+/* level 4*3 */
+
+ANSWERS43:={};
+
+Left:=4;
+Right:=3;
+
+GLeftRight:=GL(2,Integers(Left*Right));
+
+KerLeft1:=[[1+Left*x,0,0,1] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft2:=[[1,0,0,1+Left*x] : x in [0..(1+Right)] | GCD(1+Left*x,Left*Right) eq 1];
+KerLeft3:=[[1,Left,0,1],[1,0,Left,1]];
+
+KerRight1:=[[1+Right*x,0,0,1] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight2:=[[1,0,0,1+Right*x] : x in [0..(1+Left)] | GCD(1+Right*x,Left*Right) eq 1];
+KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
+
+
+X41:=sub<GLeftRight|[1,2,0,1],[1,1,1,2],[1,1,0,3+4]>; /* 4.2.0.1, 4.2.0.a.1 */
+X42:=sub<GLeftRight|[1,2,0,1],[3+4,0,0,3+4],[1,0,2,1],[1,1,0,3+4]>; /* 4.6.0.5, 4.6.0.a.1 */ 
+X43:=sub<GLeftRight|[1,1,1,2],[0,1,3+4,0],[1,1,0,3+4]>; /* 4.4.0.1, 4.4.0.a.1 */
+X44:=sub<GLeftRight|[3+4,0,0,3+4],[0,1,3+4,2],[1,0,0,3+4]>; /* 4.6.0.3, 4.6.0.b.1 */
+X45:=sub<GLeftRight|[3+4,0,0,3+4],[0,1,3+4,2],[1,2,0,3+4]>; /* 4.6.0.1, 4.6.0.c.1 */
+X46:=sub<GLeftRight|[1+4,2,2,1],[0,1,3+4,0],[1,0,0,3+4]>; /* 4.6.0.4, 4.6.0.e.1 */
+X47:=sub<GLeftRight|[1+4,2,2,1],[0,1,3+4,0],[1,2,0,3+4]>; /* 4.6.0.2, 4.6.0.d.1 */
+X48:=sub<GLeftRight|[2,1,1,3],[1,1,0,3+4]>; /* 4.8.0.2, 4.8.0.b.1 */
+X49:=sub<GLeftRight|[3+4,0,0,3+4],[1+4,2,2,1],[0,1,1,0]>; /* 4.12.0.9, 4.12.0.d.1 */
+X410:=sub<GLeftRight|[3+4,0,0,3+4],[1+4,2,2,1],[1,0,0,3+4]>; /* 4.12.0.4, 4.12.0.a.1 */
+
+X411:=sub<GLeftRight|[3+4,0,0,3+4],[1+4,2,2,1],[1,2,0,3+4]>; /* 4.12.0.3, 4.12.0.b.1 */
+X412:=sub<GLeftRight|[0,1,3+4,0],[1,0,0,3+4]>; /* 4.12.0.11, 4.12.0.f.1 */
+X413:=sub<GLeftRight|[0,1,3+4,0],[2,1+4,1,2]>; /* 4.12.0.5, 4.12.0.e.1 */
+X414:=sub<GLeftRight|[3+4,0,0,3+4],[1,0,0,3+4]>; /* 4.24.0.8, 4.24.0.b.1 */
+X415:=sub<GLeftRight|[3+4,0,0,3+4],[1,3,0,3+4]>; /* 4.24.0.2, 4.24.0.c.1 */
+
+LeftGroups:=[
+X41,X42,X43,X44,X45,X46,X47,X48,X49,X410,
+X411,X412,X413,X414,X415
+];
+
+X31:=sub<GLeftRight|[0,1,2+3,0],[1,1,1,2],[1,0,0,2+3]>;
+X32:=sub<GLeftRight|[0,1,2+3,1],[1,2,0,2+3]>;
+X33:=sub<GLeftRight|[0,1,2+3,0],[1,0,0,2+3]>;
+X34:=sub<GLeftRight|[2+3,0,0,2+3],[1,0,0,2+3]>;
+
+RightGroups:=[X31,X32,X33,X34];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#LeftGroups] do
+for j in [1..#RightGroups] do
+print <#LeftGroups-i,#RightGroups-j>;
+XLeft:=sub<GLeftRight|Generators(LeftGroups[i]),KerLeft1,KerLeft2,KerLeft3>;
+XRight:=sub<GLeftRight|Generators(RightGroups[j]),KerRight1,KerRight2,KerRight3>;
+X:=XLeft meet XRight;
+if GLeftRight![-1,0,0,-1] in X then
+g:=GL2Genus(X);
+if g lt 2 then
+ANSWERS43:=ANSWERS43 join {<GL2Label(XLeft),GL2Label(XRight),X>};
+end if;
+end if;
+end for;
+end for;
+
+#ANSWERS43; // 31 hits
+ANSWERS43:=[x:x in ANSWERS43];
+
+GL2Label(ANSWERS43[1][3]); // 12.36.1.13
+GL2Label(ANSWERS43[2][3]); // 12.18.1.3
+GL2Label(ANSWERS43[3][3]); // 12.36.1.14
+GL2Label(ANSWERS43[4][3]); // 12.16.1.1
+GL2Label(ANSWERS43[5][3]); // 12.18.0.1
+GL2Label(ANSWERS43[6][3]); // 12.18.1.1
+GL2Label(ANSWERS43[7][3]); // 12.24.1.3
+GL2Label(ANSWERS43[8][3]); // 12.36.1.17
+GL2Label(ANSWERS43[9][3]); // 12.48.1.3
+GL2Label(ANSWERS43[10][3]); // 12.48.1.4
+GL2Label(ANSWERS43[11][3]); // 12.24.1.5
+GL2Label(ANSWERS43[12][3]); // 12.24.0.4
+GL2Label(ANSWERS43[13][3]); // 12.24.0.3
+GL2Label(ANSWERS43[14][3]); // 12.72.1.2
+GL2Label(ANSWERS43[15][3]); // 12.18.0.2
+GL2Label(ANSWERS43[16][3]); // 12.12.1.1
+GL2Label(ANSWERS43[17][3]); // 12.72.1.3
+GL2Label(ANSWERS43[18][3]); // 12.36.1.12
+GL2Label(ANSWERS43[19][3]); // 12.18.1.2
+GL2Label(ANSWERS43[20][3]); // 12.36.1.9
+GL2Label(ANSWERS43[21][3]); // 12.24.0.5
+GL2Label(ANSWERS43[22][3]); // 12.32.1.4
+GL2Label(ANSWERS43[23][3]); // 12.72.1.1
+GL2Label(ANSWERS43[24][3]); // 12.36.1.3
+GL2Label(ANSWERS43[25][3]); // 12.36.1.11
+GL2Label(ANSWERS43[26][3]); // 12.12.0.5
+GL2Label(ANSWERS43[27][3]); // 12.8.0.5
+GL2Label(ANSWERS43[28][3]); // 12.6.1.1
+GL2Label(ANSWERS43[29][3]); // 12.48.1.5
+GL2Label(ANSWERS43[30][3]); // 12.24.1.1
+GL2Label(ANSWERS43[31][3]); // 12.24.1.6
+
+load "/users/garenchiloyan/Desktop/GL2GroupTheory.m";
+load "/users/garenchiloyan/Desktop/ModularCurves.m";
+
+
+M1:=CreateModularCurveRec(12,Generators(ANSWERS43[1][3]));
+FindModelOfXG(M1,1); // EllipticCurve([-15,22]), rank 0
+M2:=CreateModularCurveRec(12,Generators(ANSWERS43[2][3]));
+FindModelOfXG(M2,1); // EllipticCurve([0,-1]), rank 0
+M3:=CreateModularCurveRec(12,Generators(ANSWERS43[3][3]));
+FindModelOfXG(M3,1); // EllipticCurve([-15,-22]), rank 0
+M4:=CreateModularCurveRec(12,Generators(ANSWERS43[4][3]));
+FindModelOfXG(M4,1); // EllipticCurve([0,1,0,16,180]), rank 0
+M6:=CreateModularCurveRec(12,Generators(ANSWERS43[6][3]));
+FindModelOfXG(M6,1); // EllipticCurve([0,1]), rank 0
+M7:=CreateModularCurveRec(12,Generators(ANSWERS43[7][3]));
+FindModelOfXG(M7,1); // EllipticCurve([0,27]), rank 0
+M8:=CreateModularCurveRec(12,Generators(ANSWERS43[8][3]));
+FindModelOfXG(M8,1); // EllipticCurve([0,1]), rank 0
+M9:=CreateModularCurveRec(12,Generators(ANSWERS43[9][3]));
+FindModelOfXG(M9,1); // EllipticCurve([0,-1,0,-4,4]), rank 0
+M10:=CreateModularCurveRec(12,Generators(ANSWERS43[10][3]));
+FindModelOfXG(M10,1); // EllipticCurve([0,1,0,-4,-4]), rank 0
+M11:=CreateModularCurveRec(12,Generators(ANSWERS43[11][3]));
+FindModelOfXG(M11,1); // EllipticCurve([0,-1,0,-24,-36]), rank 0
+M14:=CreateModularCurveRec(12,Generators(ANSWERS43[14][3]));
+FindModelOfXG(M14,1); // EllipticCurve([0,-1]), rank 0
+M16:=CreateModularCurveRec(12,Generators(ANSWERS43[16][3]));
+FindModelOfXG(M16,1); // EllipticCurve([-135,594]), rank 0
+M17:=CreateModularCurveRec(12,Generators(ANSWERS43[17][3]));
+FindModelOfXG(M17,1); // EllipticCurve([0,-1]), rank 0
+M18:=CreateModularCurveRec(12,Generators(ANSWERS43[18][3]));
+FindModelOfXG(M18,1); // EllipticCurve([0,1,0,-4,-4]), rank 0
+M19:=CreateModularCurveRec(12,Generators(ANSWERS43[19][3]));
+FindModelOfXG(M19,1); // EllipticCurve([0,-1]), rank 0
+M20:=CreateModularCurveRec(12,Generators(ANSWERS43[20][3]));
+FindModelOfXG(M20,1); // EllipticCurve([-15,-22]), rank 0
+M22:=CreateModularCurveRec(12,Generators(ANSWERS43[22][3]));
+FindModelOfXG(M22,1); // EllipticCurve([0,1,0,-24,36]), rank 0
+M23:=CreateModularCurveRec(12,Generators(ANSWERS43[23][3]));
+FindModelOfXG(M23,1); // EllipticCurve([0,1]), rank 0
+M24:=CreateModularCurveRec(12,Generators(ANSWERS43[24][3]));
+FindModelOfXG(M24,1); // EllipticCurve([0,-1]), rank 0
+M25:=CreateModularCurveRec(12,Generators(ANSWERS43[25][3]));
+FindModelOfXG(M25,1); // EllipticCurve([0,-1,0,-4,4]), rank 0
+M28:=CreateModularCurveRec(12,Generators(ANSWERS43[28][3]));
+FindModelOfXG(M28,1); // EllipticCurve([0,27]), rank 0
+M29:=CreateModularCurveRec(12,Generators(ANSWERS43[29][3]));
+FindModelOfXG(M29,1); // EllipticCurve([0,1,0,-4,-4]), rank 0
+M30:=CreateModularCurveRec(12,Generators(ANSWERS43[30][3]));
+FindModelOfXG(M30,1); // EllipticCurve([0,1,0,-24,36]), rank 0
+M31:=CreateModularCurveRec(12,Generators(ANSWERS43[31][3]));
+FindModelOfXG(M31,1); // EllipticCurve([0,1,0,-24,36]), rank 0
+
+// all modular curves with finitely many points over rationals
+
+/* level 2*3 */
+
+
+
+
 !!!!!!!!
-
-
 
 GRS:=GL(2,Integers(R*S));
 
