@@ -1505,8 +1505,102 @@ IsConjugate(GLeftRight,A54,ANSWERS83[54][3]);
 A55:=sub<GLeftRight|[11,6,9,11],[11,18,18,1],[20,9,3,14],[23,6,9,7]>; // 24.24.1.2
 IsConjugate(GLeftRight,A55,ANSWERS83[55][3]);
 
+load "/users/garenchiloyan/Desktop/GL2GroupTheory.m";
+load "/users/garenchiloyan/Desktop/ModularCurves.m";
 
+M1:=CreateModularCurveRec(24,Generators(A1));
+FindModelOfXG(M1,1); // EllipticCurve([0,8]), rank 1
+M2:=CreateModularCurveRec(24,Generators(A2));
+FindModelOfXG(M2,1); // EllipticCurve([0,8]), rank 1
+M3:=CreateModularCurveRec(24,Generators(A3));
+FindModelOfXG(M3,1); // no rational points
+M4:=CreateModularCurveRec(24,Generators(A4));
+FindModelOfXG(M4,1); // EllipticCurve([0,-8]), rank 0
 
+M6:=CreateModularCurveRec(24,Generators(A6));
+FindModelOfXG(M6,1); // EllipticCurve([0,-1]), rank 0
+M7:=CreateModularCurveRec(24,Generators(A7));
+FindModelOfXG(M7,1); // EllipticCurve([0,1,0,-17,15]), rank 0
+
+M9:=CreateModularCurveRec(24,Generators(A9));
+FindModelOfXG(M9,1); // EllipticCurve([0,1]), rank 0
+
+M11:=CreateModularCurveRec(24,Generators(A11));
+FindModelOfXG(M11,1); // EllipticCurve([0,8]), rank 1
+M12:=CreateModularCurveRec(24,Generators(A12));
+FindModelOfXG(M12,1); // no rational points
+M13:=CreateModularCurveRec(24,Generators(A13));
+FindModelOfXG(M13,1); // EllipticCurve([0,-1,0,-17,-15]), rank 0
+M16:=CreateModularCurveRec(24,Generators(A16));
+FindModelOfXG(M16,1); // EllipticCurve([0,-1,0,-17,-15]), rank 0
+M18:=CreateModularCurveRec(24,Generators(A18));
+FindModelOfXG(M18,1); // EllipticCurve([0,216]), rank 0
+
+M20:=CreateModularCurveRec(24,Generators(A20));
+FindModelOfXG(M20,1); // EllipticCurve([0,8]), rank 1
+M21:=CreateModularCurveRec(24,Generators(A21));
+FindModelOfXG(M21,1); // EllipticCurve([0,1,0,-4,-4]), rank 0
+M22:=CreateModularCurveRec(24,Generators(A22));
+FindModelOfXG(M22,1); // EllipticCurve([0,1,0,-4,4]), rank 0
+M23:=CreateModularCurveRec(24,Generators(A23));
+FindModelOfXG(M23,1); // EllipticCurve([0,1,0,-17,15]), rank 0
+M24:=CreateModularCurveRec(24,Generators(A24));
+FindModelOfXG(M24,1); // no rational points
+M25:=CreateModularCurveRec(24,Generators(A25));
+FindModelOfXG(M25,1); // EllipticCurve([-60,176]), rank 1
+M26:=CreateModularCurveRec(24,Generators(A26));
+FindModelOfXG(M26,1); // EllipticCurve([0,-8]), rank 0
+M27:=CreateModularCurveRec(24,Generators(A27));
+FindModelOfXG(M27,1); // EllipticCurve([0,-8]), rank 0
+M28:=CreateModularCurveRec(24,Generators(A28));
+FindModelOfXG(M28,1); // EllipticCurve([0,8]), rank 1
+M29:=CreateModularCurveRec(24,Generators(A29));
+FindModelOfXG(M29,1); // no rational points
+
+M30:=CreateModularCurveRec(24,Generators(A30));
+FindModelOfXG(M30,1); // EllipticCurve([-60,-176]), rank 0
+M32:=CreateModularCurveRec(24,Generators(A32));
+FindModelOfXG(M32,1); // EllipticCurve([0,-8]), rank 0
+M33:=CreateModularCurveRec(24,Generators(A33));
+FindModelOfXG(M33,1); // EllipticCurve([0,-216]), rank 1
+M34:=CreateModularCurveRec(24,Generators(A34));
+FindModelOfXG(M34,1); // no rational points
+M35:=CreateModularCurveRec(24,Generators(A35));
+FindModelOfXG(M35,1); // EllipticCurve([0,-1,0,-97,385]), rank 1
+M36:=CreateModularCurveRec(24,Generators(A36));
+FindModelOfXG(M36,1); // EllipticCurve([0,-8]), rank 0
+M38:=CreateModularCurveRec(24,Generators(A38));
+FindModelOfXG(M38,1); // EllipticCurve([0,-1,0,-17,-15]), rank 0
+M39:=CreateModularCurveRec(24,Generators(A39));
+FindModelOfXG(M39,1); // EllipticCurve([-540,4752]), rank 0
+
+M40:=CreateModularCurveRec(24,Generators(A40));
+FindModelOfXG(M40,1); // EllipticCurve([0,8]), rank 1
+M41:=CreateModularCurveRec(24,Generators(A41));
+FindModelOfXG(M41,1); // EllipticCurve([0,216]), rank 0
+M42:=CreateModularCurveRec(24,Generators(A42));
+FindModelOfXG(M42,1); // EllipticCurve([0,-1,0,-17,-15]), rank 0
+M43:=CreateModularCurveRec(24,Generators(A43));
+FindModelOfXG(M43,1); // EllipticCurve([-60,176]); rank 1
+M45:=CreateModularCurveRec(24,Generators(A45));
+FindModelOfXG(M45,1); // EllipticCurve([0,1,0,-17,15]), rank 0
+M46:=CreateModularCurveRec(24,Generators(A46));
+FindModelOfXG(M46,1); // EllipticCurve([0,-8]), rank 0
+M48:=CreateModularCurveRec(24,Generators(A48));
+FindModelOfXG(M48,1); // EllipticCurve([0,8]), rank 1
+
+M50:=CreateModularCurveRec(24,Generators(A50));
+FindModelOfXG(M50,1); // no rational points
+M51:=CreateModularCurveRec(24,Generators(A51));
+FindModelOfXG(M51,1); // EllipticCurve([-60,-176]), rank 0
+M52:=CreateModularCurveRec(24,Generators(A52));
+FindModelOfXG(M52,1); // EllipticCurve([0,1,0,-17,15]), rank 0
+M53:=CreateModularCurveRec(24,Generators(A53));
+FindModelOfXG(M53,1); // EllipticCurve([0,1,0,-97,-385]), rank 0
+M54:=CreateModularCurveRec(24,Generators(A54));
+FindModelOfXG(M54,1); // EllipticCurve([-540,-4752]), rank 1
+M55:=CreateModularCurveRec(24,Generators(A55));
+FindModelOfXG(M55,1); // EllipticCurve([0,-216]), rank 1
 
 !!!!!!!!
 
