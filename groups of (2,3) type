@@ -989,7 +989,7 @@ FindModelOfXG(M4,1); // EllipticCurve([0,27]), rank 0
 M5:=CreateModularCurveRec(36,Generators(A5));
 FindModelOfXG(M5,1); // EllipticCurve([0,1]), rank 0
 M6:=CreateModularCurveRec(36,Generators(A6));
-FindModelOfXG(M6,1); // EllipticCurve([0,-1]), rank 1
+FindModelOfXG(M6,1); // EllipticCurve([0,-1]), rank 0
 
 /* Level 2*9 */
 
