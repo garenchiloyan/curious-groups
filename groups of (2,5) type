@@ -1283,7 +1283,6 @@ IsConjugate(GLeftRight,A24,ANSWERS85[24][3]);
 load "/users/garenchiloyan/Desktop/GL2GroupTheory.m";
 load "/users/garenchiloyan/Desktop/ModularCurves.m";
 
-
 M3:=CreateModularCurveRec(40,Generators(A3));
 FindModelOfXG(M3,1); // EllipticCurve([0,1,0,-145,975]), rank 1
 M4:=CreateModularCurveRec(40,Generators(A4));
@@ -1359,3 +1358,94 @@ FindModelOfXG(M24,1); // EllipticCurve([0,1,0,-5,-5]), rank 1
 40.72.1.29, [3,9,24,3],[17,16,38,5],[23,28,4,7],[29,29,38,15],[39,0,20,29]
 
 */
+
+load "/users/garenchiloyan/Desktop/GL2GroupTheory.m";
+load "/users/garenchiloyan/Desktop/ModularCurves.m";
+
+G40:=GL(2,Integers(40));
+
+// first collection of groups of level 40 to study
+
+H401215:=sub<G40|[2,37,1,38],[4,29,13,35],[6,3,3,16],[39,14,7,31]>;
+M401215:=CreateModularCurveRec(40,Generators(H401215));
+FindModelOfXG(M401215,1); // EllipticCurve([0,1,0,-145,975]), label 320.a2
+
+H4024117:=sub<G40|[23,18,35,11],[29,17,21,30],[35,26,2,29],[35,39,18,31]>;
+M4024117:=CreateModularCurveRec(40,Generators(H4024117));
+FindModelOfXG(M4024117,1); // EllipticCurve([0,1,0,-165,763]), label 320.a1
+
+H4024122:=sub<G40|[1,26,15,37],[11,11,17,10],[15,31,14,7],[26,1,15,17]>;
+M4024122:=CreateModularCurveRec(40,Generators(H4024122));
+FindModelOfXG(M4024122,1); // EllipticCurve([0,1,0,-165,763]), label 320.a1
+
+H40241132:=sub<G40|[25,12,39,3],[34,3,3,9],[37,15,39,28]>;
+M40241132:=CreateModularCurveRec(40,Generators(H40241132));
+FindModelOfXG(M40241132,1); // EllipticCurve([0,1,0,-165,763]), label 320.a1
+
+H40241137:=sub<G40|[5,27,29,18],[36,31,29,8],[37,35,9,38]>;
+M40241137:=CreateModularCurveRec(40,Generators(H40241137));
+FindModelOfXG(M40241137,1); EllipticCurve([0,1,0,-165,763]), label 320.a1
+
+// second collection of groups of level 40 to study
+
+H402012:=sub<G40|[2,31,29,21],[3,30,0,13],[8,1,29,32],[17,6,14,3]>;
+M402012:=CreateModularCurveRec(40,Generators(H402012));
+FindModelOfXG(M402012,1); // EllipticCurve([0,1,0,367,2863]), label 1600.c4
+
+H4040130:=sub<G40|[0,27,17,20],[3,9,6,17],[3,29,36,29]>;
+M4040130:=CreateModularCurveRec(40,Generators(H4040130));
+FindModelOfXG(M4040130,1); // EllipticCurve([0,1,0,-133,363]), label 1600.c3
+
+H4040135:=sub<G40|[5,1,14,29],[24,9,25,11],[33,19,21,32]>;
+M4040135:=CreateModularCurveRec(40,Generators(H4040135));
+FindModelOfXG(M4040135,1); // EllipticCurve([0,1,0,-133,363]), label 1600.c3
+
+// third collection of groups of level 40 to study
+
+H403612:=sub<G40|[17,10,0,17],[17,22,0,9],[29,32,6,15],[35,34,26,3],[35,39,2,7]>;
+M403612:=CreateModularCurveRec(40,Generators(H403612));
+FindModelOfXG(M403612,1); // EllipticCurve([-28,-48]), label 320.c2
+
+H4072135:=sub<G40|[1,12,32,1],[33,10,12,31],[33,34,22,15],[35,31,18,13]>;
+M4072135:=CreateModularCurveRec(40,Generators(H4072135));
+FindModelOfXG(M4072135,1); // EllipticCurve([-8,8]), label 320.c3
+
+H4072144:=sub<G40|[5,33,16,7],[9,10,36,23],[25,36,26,5],[39,32,26,35]>;
+M4072144:=CreateModularCurveRec(40,Generators(H4072144));
+FindModelOfXG(M4072144,1); // EllipticCurve([-8,8]), label 320.c3
+
+H4072167:=sub<G40|[5,8,14,9],[21,18,24,35],[29,14,30,3],[37,35,30,37]>;
+M4072167:=CreateModularCurveRec(40,Generators(H4072167));
+FindModelOfXG(M4072167,1); // EllipticCurve([-8,8]), label 320.c3
+
+H4072176:=sub<G40|[7,22,34,15],[9,30,2,7],[17,31,30,33],[35,38,16,27]>;
+M4072176:=CreateModularCurveRec(40,Generators(H4072176));
+FindModelOfXG(M4072176,1); // EllipticCurve([-8,8]), label 320.c3
+
+// fourth collection of groups of level 40 to study
+
+H403614:=sub<G40|[3,34,32,35],[7,4,28,13],[9,27,0,11],[31,15,24,37],[37,21,26,37]>;
+M403614:=CreateModularCurveRec(40,Generators(H403614));
+FindModelOfXG(M403614,1); // EllipticCurve([0,1,0,15,-17]), label 320.a4
+
+H4072122:=sub<G40|[9,12,36,25],[21,5,38,23],[27,7,24,35],[29,35,12,27],[33,31,26,3]>;
+M4072122:=CreateModularCurveRec(40,Generators(H4072122));
+FindModelOfXG(M4072122,1); // EllipticCurve([0,1,0,-5,-5]), label 320.a3
+
+H4072129:=sub<G40|[3,9,24,3],[17,16,38,5],[23,28,4,7],[29,29,38,15],[39,0,20,29]>;
+M4072129:=CreateModularCurveRec(40,Generators(H4072129));
+FindModelOfXG(M4072129,1); // EllipticCurve([0,1,0,-5,-5]), label 320.a3
+
+H4072182:=sub<G40|[11,17,4,29],[15,34,2,37],[19,2,32,19],[25,39,32,17]>;
+M4072182:=CreateModularCurveRec(40,Generators(H4072182));
+FindModelOfXG(M4072182,1); // EllipticCurve([0,1,0,-5,-5]), label 320.a3
+
+H4072189:=sub<G40|[7,5,0,37],[15,28,26,17],[21,25,20,1],[37,36,14,9]>;
+M4072189:=CreateModularCurveRec(40,Generators(H4072189));
+FindModelOfXG(M4072189,1); // EllipticCurve([0,1,0,-5,-5]), label 320.a3
+
+// fifth collection of groups of level 40 to study
+
+H403615:=sub<G40|[1,38,28,1],[7,15,30,17],[11,32,14,19],[25,4,26,3],[27,27,26,33]>;
+M403615:=CreateModularCurveRec(40,Generators(H403615));
+FindModelOfXG(M403615,1); // EllipticCurve([0,1,0,15,-17]), label 320.a4
