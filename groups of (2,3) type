@@ -1952,7 +1952,109 @@ end for;
 
 // 1 hit
 
+/* proving that all proper arithmetically admissible subgroups of 24.36.1.149 have genus > 1 */
 
+N:=24;
+
+G:=GL(2,Integers(N));
+
+X:=sub<G|[1,14,14,23],[1,14,16,1],[19,3,12,7],[23,1,4,13]>;
+
+S:=Subgroups(X);
+Slist0:=[s`subgroup : s in S];
+
+Slist1:=[s:s in Slist0 | G![-1,0,0,-1] in s];
+
+#Slist1;
+
+Slist2:=[s:s in Slist1 | #{Determinant(x) : x in s} eq EulerPhi(N)];
+
+#Slist2;
+
+Slist3:={};
+
+for s in Slist2 do
+DetTra:={<Determinant(g),Trace(g)> : g in s};
+if <-1,0> in DetTra then
+Slist3:=Slist3 join {s};
+end if;
+end for;
+
+Slist3:=[s : s in Slist3];
+
+nolist:={};
+for i in [1..#Slist3-1] do;
+for j in [i+1..#Slist3] do;
+if IsConjugate(G,Slist0[i],Slist0[j]) then
+nolist:=nolist join {Slist0[j]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs notin nolist];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#Slist4] do
+if GL2Genus(Slist4[i]) lt 2 then
+<i,GL2Level(Slist4[i]), GL2Genus(Slist4[i]), GL2Index(Slist4[i])>;
+end if;
+end for;
+
+// 1 hit
+
+/* proving that all proper arithmetically admissible subgroups of 24.36.1.146 have genus > 1 */
+
+N:=24;
+
+G:=GL(2,Integers(N));
+
+X:=sub<G|[13,17,20,11],[19,21,6,11],[19,23,14,23],[21,1,8,9]>;
+
+S:=Subgroups(X);
+Slist0:=[s`subgroup : s in S];
+
+Slist1:=[s:s in Slist0 | G![-1,0,0,-1] in s];
+
+#Slist1;
+
+Slist2:=[s:s in Slist1 | #{Determinant(x) : x in s} eq EulerPhi(N)];
+
+#Slist2;
+
+Slist3:={};
+
+for s in Slist2 do
+DetTra:={<Determinant(g),Trace(g)> : g in s};
+if <-1,0> in DetTra then
+Slist3:=Slist3 join {s};
+end if;
+end for;
+
+Slist3:=[s : s in Slist3];
+
+nolist:={};
+for i in [1..#Slist3-1] do;
+for j in [i+1..#Slist3] do;
+if IsConjugate(G,Slist0[i],Slist0[j]) then
+nolist:=nolist join {Slist0[j]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs notin nolist];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#Slist4] do
+if GL2Genus(Slist4[i]) lt 2 then
+<i,GL2Level(Slist4[i]), GL2Genus(Slist4[i]), GL2Index(Slist4[i])>;
+end if;
+end for;
+
+// 1 hit
 
 /* proving that 72.72.1.c.1 = 8.6.0.1 x 9.12.0.1 has no proper arithmetically admissible subgroups of genus < 2 */
 
