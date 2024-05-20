@@ -1900,115 +1900,314 @@ end for;
 
 // 1 hit
 
-// 72.72.1.b.1
+/* proving that 72.72.1.c.1 = 8.6.0.1 x 9.12.0.1 has no proper arithmetically admissible subgroups of genus < 2 */
 
-N:=72;
+/* investigating subgroups of <8.6.0.1, 9.12.0.1> of genus < 2 */
 
-G:=GL(2,Integers(N));
-
-GENS:=[[41,12,2,7],[49,54,16,71],[55,38,18,29],[60,37,1,18],[64,23,69,14]];
-
-X:=sub<G|GENS>;
-
-S:=Subgroups(X);
-Slist0:=[s`subgroup : s in S];
-
-Slist1:=[s:s in Slist0 | G![-1,0,0,-1] in s];
-
-#Slist1;
-
-Slist2:=[s:s in Slist1 | #{Determinant(x) : x in s} eq EulerPhi(N)];
-
-#Slist2;
-
-Slist3:={};
-
-for s in Slist2 do
-DetTra:={<Determinant(g),Trace(g)> : g in s};
-if <-1,0> in DetTra then
-Slist3:=Slist3 join {s};
-end if;
-end for;
-
-Slist3:=[s : s in Slist3];
-
-nolist:={};
-for i in [1..#Slist3-1] do;
-for j in [i+1..#Slist3] do;
-if IsConjugate(G,Slist0[i],Slist0[j]) then
-nolist:=nolist join {Slist0[j]};
-end if;
-end for;
-end for;
-Slist4:=[subs : subs in Slist3 | subs notin nolist];
+CANDIDATES:={};
 
 Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
-
 load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
-
-for i in [1..#Slist4] do
-if GL2Genus(Slist4[i]) lt 2 then
-<i,GL2Level(Slist4[i]), GL2Genus(Slist4[i]), GL2Index(Slist4[i])>;
-end if;
-end for;
-
-// 1 hit
-
-// 72.72.1.c.1
 
 N:=72;
+TOT:=Exponent(UnitGroup(Integers(N)));
+GN:=GL(2,Integers(N));
 
-G:=GL(2,Integers(N));
+GENS:=[[1,4,0,1],[17,0,0,1],[25,0,0,1],[59,0,0,1],[5,14,0,1],[11,0,0,11],[1,2,0,5],[1,0,0,17],[16,11,45,2]];
+X:=sub<GN|GENS>;
 
-GENS:=[[3,20,34,7],[24,49,47,26],[65,24,10,55],[67,52,32,33],[69,34,38,11]];
+SX:=X meet SL(2,Integers(N));
+SS:=[s`subgroup : s in Subgroups(SX)];
+SS:=[s:s in SS | GN![-1,0,0,-1] in s];
 
-X:=sub<G|GENS>;
+SXList:={};
 
-S:=Subgroups(X);
-Slist0:=[s`subgroup : s in S];
-
-Slist1:=[s:s in Slist0 | G![-1,0,0,-1] in s];
-
-#Slist1;
-
-Slist2:=[s:s in Slist1 | #{Determinant(x) : x in s} eq EulerPhi(N)];
-
-#Slist2;
-
-Slist3:={};
-
-for s in Slist2 do
-DetTra:={<Determinant(g),Trace(g)> : g in s};
-if <-1,0> in DetTra then
-Slist3:=Slist3 join {s};
+for i in [1..#SS] do
+#SS-i+1;
+if GL2Genus(SS[i]) lt 2 then
+SXList:=SXList join {SS[i]};
 end if;
 end for;
 
-Slist3:=[s : s in Slist3];
+SXList:=[s:s in SXList];
+#SXList;
+// 1 set in SXList
 
-nolist:={};
-for i in [1..#Slist3-1] do;
-for j in [i+1..#Slist3] do;
-if IsConjugate(G,Slist0[i],Slist0[j]) then
-nolist:=nolist join {Slist0[j]};
+SLsub1:=SXList[1];
+
+/* work with SLsub1 indices 2, 4 */
+
+/* SLsub1 and index 4 */
+
+Slist0 := [s`subgroup : s in Subgroups(X : IndexEqual := 4)];
+
+list1:={};
+for i0 in [1..#Slist0] do
+if #{Determinant(x) : x in Slist0[i0]} eq EulerPhi(N) then
+list1:=list1 join {Slist0[i0]};
+end if;
+end for;
+Slist1:=[s:s in Slist0 | s in list1];
+
+if #list1 gt 0 then
+list2:={};
+for i1 in [1..#Slist1] do
+if <-1,0> in {<Determinant(g),Trace(g)> : g in Slist1[i1]} then
+list2:=list2 join {Slist1[i1]};
+end if;
+end for;
+Slist2:=[s : s in Slist1 | s in list2];
+end if;
+
+if #list1 gt 0 then
+if #list2 gt 0 then
+list3:={};
+for i2 in [1..#Slist2] do
+if SX meet Slist2[i2] eq SLsub1 then
+list3:=list3 join {Slist2[i2]};
+end if;
+end for;
+end if;
+end if;
+Slist3:=[x:x in list3];
+
+/*
+list4:={};
+if #list2 gt 0 then
+if #list3 gt 0 then
+list4:={Slist3[#Slist3]};
+for i3 in [1..#Slist3-1] do;
+CONJ:=false;
+for j in [i3+1..#Slist3] do;
+if IsConjugate(GN,Slist3[i3],Slist3[j]) then
+CONJ:=true;
+break;
+end if;
+if CONJ eq false then
+list4:=list4 join {Slist3[i3]};
 end if;
 end for;
 end for;
-Slist4:=[subs : subs in Slist3 | subs notin nolist];
+Slist4:=[subs : subs in Slist3 | subs in list4];
+end if;
+end if;
+*/
+
+for x in Slist3 do
+CANDIDATES:=CANDIDATES join {x};
+end for;
+
+/* SLsub1 and index 2 */
+
+Slist0 := [s`subgroup : s in Subgroups(X : IndexEqual := 2)];
+
+list1:={};
+for i0 in [1..#Slist0] do
+if #{Determinant(x) : x in Slist0[i0]} eq EulerPhi(N) then
+list1:=list1 join {Slist0[i0]};
+end if;
+end for;
+Slist1:=[s:s in Slist0 | s in list1];
+
+if #list1 gt 0 then
+list2:={};
+for i1 in [1..#Slist1] do
+if <-1,0> in {<Determinant(g),Trace(g)> : g in Slist1[i1]} then
+list2:=list2 join {Slist1[i1]};
+end if;
+end for;
+Slist2:=[s : s in Slist1 | s in list2];
+end if;
+
+if #list2 gt 0 then
+list3:={};
+for i2 in [1..#Slist2] do
+if SX meet Slist2[i2] eq SLsub1 then
+list3:=list3 join {Slist2[i2]};
+end if;
+end for;
+Slist3:=[x : x in list3];
+end if;
+
+/*
+if #list3 gt 0 then
+list4:={Slist3[#Slist3]};
+for i3 in [1..#Slist3-1] do;
+CONJ:=false;
+for j in [i3+1..#Slist3] do;
+if IsConjugate(GN,Slist3[i3],Slist3[j]) then
+CONJ:=true;
+break;
+end if;
+if CONJ eq false then
+list4:=list4 join {Slist3[i3]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs in list4];
+end if;
+*/
+
+for x in Slist3 do
+CANDIDATES:=CANDIDATES join {x};
+end for;
+
+/* NO GROUPS DONE THIS EXAMPLE IS NOT CURIOUS */
+
+
+/* proving that 72.72.1.b.1 = 8.6.0.6 x 9.12.0.1 has no proper arithmetically admissible subgroups of genus < 2 */
+
+
+CANDIDATES:={};
 
 Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
-
 load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
 
-for i in [1..#Slist4] do
-if GL2Genus(Slist4[i]) lt 2 then
-<i,GL2Level(Slist4[i]), GL2Genus(Slist4[i]), GL2Index(Slist4[i])>;
+N:=72;
+TOT:=Exponent(UnitGroup(Integers(N)));
+GN:=GL(2,Integers(N));
+
+GENS:=[[17,0,0,1],[11,1,0,1],[47,26,0,1],[1,1,0,11],[49,0,0,1],[1,12,0,49],[1,22,0,1],
+[1,64,0,1],[1,48,0,1],[55,18,0,55],[19,36,18,19],[1,36,0,1],[1,0,36,1],[37,0,0,37]];
+X:=sub<GN|GENS>;
+
+SX:=X meet SL(2,Integers(N));
+SS:=[s`subgroup : s in Subgroups(SX)];
+SS:=[s:s in SS | GN![-1,0,0,-1] in s];
+
+SXList:={};
+
+for i in [1..#SS] do
+#SS-i+1;
+if GL2Genus(SS[i]) lt 2 then
+SXList:=SXList join {SS[i]};
 end if;
 end for;
 
-// 1 hit
+SXList:=[s:s in SXList];
+#SXList;
+// 1 set in SXList
 
+SLsub1:=SXList[1];
 
+/* work with SLsub1 indices 2, 4 */
+
+/* SLsub1 and index 4 */
+
+Slist0 := [s`subgroup : s in Subgroups(X : IndexEqual := 4)];
+
+list1:={};
+for i0 in [1..#Slist0] do
+if #{Determinant(x) : x in Slist0[i0]} eq EulerPhi(N) then
+list1:=list1 join {Slist0[i0]};
+end if;
+end for;
+Slist1:=[s:s in Slist0 | s in list1];
+
+if #list1 gt 0 then
+list2:={};
+for i1 in [1..#Slist1] do
+if <-1,0> in {<Determinant(g),Trace(g)> : g in Slist1[i1]} then
+list2:=list2 join {Slist1[i1]};
+end if;
+end for;
+Slist2:=[s : s in Slist1 | s in list2];
+end if;
+
+if #list1 gt 0 then
+if #list2 gt 0 then
+list3:={};
+for i2 in [1..#Slist2] do
+if SX meet Slist2[i2] eq SLsub1 then
+list3:=list3 join {Slist2[i2]};
+end if;
+end for;
+end if;
+end if;
+Slist3:=[x:x in list3];
+
+/*
+list4:={};
+if #list2 gt 0 then
+if #list3 gt 0 then
+list4:={Slist3[#Slist3]};
+for i3 in [1..#Slist3-1] do;
+CONJ:=false;
+for j in [i3+1..#Slist3] do;
+if IsConjugate(GN,Slist3[i3],Slist3[j]) then
+CONJ:=true;
+break;
+end if;
+if CONJ eq false then
+list4:=list4 join {Slist3[i3]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs in list4];
+end if;
+end if;
+*/
+
+for x in Slist3 do
+CANDIDATES:=CANDIDATES join {x};
+end for;
+
+/* SLsub1 and index 2 */
+
+Slist0 := [s`subgroup : s in Subgroups(X : IndexEqual := 2)];
+
+list1:={};
+for i0 in [1..#Slist0] do
+if #{Determinant(x) : x in Slist0[i0]} eq EulerPhi(N) then
+list1:=list1 join {Slist0[i0]};
+end if;
+end for;
+Slist1:=[s:s in Slist0 | s in list1];
+
+if #list1 gt 0 then
+list2:={};
+for i1 in [1..#Slist1] do
+if <-1,0> in {<Determinant(g),Trace(g)> : g in Slist1[i1]} then
+list2:=list2 join {Slist1[i1]};
+end if;
+end for;
+Slist2:=[s : s in Slist1 | s in list2];
+end if;
+
+if #list2 gt 0 then
+list3:={};
+for i2 in [1..#Slist2] do
+if SX meet Slist2[i2] eq SLsub1 then
+list3:=list3 join {Slist2[i2]};
+end if;
+end for;
+Slist3:=[x : x in list3];
+end if;
+
+/*
+if #list3 gt 0 then
+list4:={Slist3[#Slist3]};
+for i3 in [1..#Slist3-1] do;
+CONJ:=false;
+for j in [i3+1..#Slist3] do;
+if IsConjugate(GN,Slist3[i3],Slist3[j]) then
+CONJ:=true;
+break;
+end if;
+if CONJ eq false then
+list4:=list4 join {Slist3[i3]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs in list4];
+end if;
+*/
+
+for x in Slist3 do
+CANDIDATES:=CANDIDATES join {x};
+end for;
+
+/* NO GROUPS DONE THIS EXAMPLE IS NOT CURIOUS */
 
 // IGNORE THE REST
 !!!!!!!!
