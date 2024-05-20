@@ -713,6 +713,22 @@ A10, EllipticCurve([1,-10]), rank 0
 A11, EllipticCurve([-4,-3]), rank 0
 A12, EllipticCurve([-4,-3]), rank 0
 
+*/
+
+X:=EllipticCurve([4,80]);
+g:=Generators(X)[2];
+Order(g); // 0
+
+XX:=EllipticCurve([-16,24]);
+gg:=Generators(XX)[2];
+Order(gg); // 0
+
+_,phi:=IsIsogenous(XX,X);
+phi(gg) eq -2*g; // true
+
+
+// IGNORE EVERYTHING ELSE
+
 
 
 
