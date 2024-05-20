@@ -1411,6 +1411,18 @@ H4040135:=sub<G40|[5,1,14,29],[24,9,25,11],[33,19,21,32]>;
 M4040135:=CreateModularCurveRec(40,Generators(H4040135));
 FindModelOfXG(M4040135,1); // EllipticCurve([0,1,0,-133,363]), label 1600.c3
 
+X:=EllipticCurve([0,1,0,367,2863]);
+g:=Generators(X)[2];
+Order(g); // 0
+
+XX:=EllipticCurve([0,1,0,-133,363]);
+gg:=Generators(XX)[2];
+Order(gg); // 0
+
+_,phi:=IsIsogenous(XX,X);
+phi(gg) eq -g; // true
+
+
 // third collection of groups of level 40 to study
 
 H403612:=sub<G40|[17,10,0,17],[17,22,0,9],[29,32,6,15],[35,34,26,3],[35,39,2,7]>;
@@ -1433,6 +1445,18 @@ H4072176:=sub<G40|[7,22,34,15],[9,30,2,7],[17,31,30,33],[35,38,16,27]>;
 M4072176:=CreateModularCurveRec(40,Generators(H4072176));
 FindModelOfXG(M4072176,1); // EllipticCurve([-8,8]), label 320.c3
 
+X:=EllipticCurve([-28,-48]);
+g:=Generators(X)[3];
+Order(g); // 0
+
+XX:=EllipticCurve([-8,8]);
+gg:=Generators(XX)[2];
+Order(gg); // 0
+
+_,phi:=IsIsogenous(XX,X);
+phi(gg) eq g; // true
+
+
 // fourth collection of groups of level 40 to study
 
 H403614:=sub<G40|[3,34,32,35],[7,4,28,13],[9,27,0,11],[31,15,24,37],[37,21,26,37]>;
@@ -1454,6 +1478,18 @@ FindModelOfXG(M4072182,1); // EllipticCurve([0,1,0,-5,-5]), label 320.a3
 H4072189:=sub<G40|[7,5,0,37],[15,28,26,17],[21,25,20,1],[37,36,14,9]>;
 M4072189:=CreateModularCurveRec(40,Generators(H4072189));
 FindModelOfXG(M4072189,1); // EllipticCurve([0,1,0,-5,-5]), label 320.a3
+
+X:=EllipticCurve([0,1,0,15,-17]);
+g:=Generators(X)[2];
+Order(g); // 0
+
+XX:=EllipticCurve([0,1,0,-5,-5]);
+gg:=Generators(XX)[2];
+Order(gg); // 0
+
+_,phi:=IsIsogenous(XX,X);
+phi(gg) eq 2*g; // true
+
 
 // fifth collection of groups of level 40 to study
 
