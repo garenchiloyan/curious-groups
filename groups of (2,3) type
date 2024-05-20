@@ -1844,7 +1844,173 @@ FindModelOfXG(M12,1); // EllipticCurve([0,-27]), rank 0
 // all modular curves with finitely many rational points
 
 
-IGNORE THE REST
+// check the groups which do not contain proper arithmetically admissible subgroups of genus < 2
+
+// 36.36.1.1
+
+N:=36;
+
+G:=GL(2,Integers(N));
+
+GENS:=[[15,13,28,33],[19,10,29,25],[21,29,14,3],[35,28,31,13]];
+
+X:=sub<G|GENS>;
+
+S:=Subgroups(X);
+Slist0:=[s`subgroup : s in S];
+
+Slist1:=[s:s in Slist0 | G![-1,0,0,-1] in s];
+
+#Slist1;
+
+Slist2:=[s:s in Slist1 | #{Determinant(x) : x in s} eq EulerPhi(N)];
+
+#Slist2;
+
+Slist3:={};
+
+for s in Slist2 do
+DetTra:={<Determinant(g),Trace(g)> : g in s};
+if <-1,0> in DetTra then
+Slist3:=Slist3 join {s};
+end if;
+end for;
+
+Slist3:=[s : s in Slist3];
+
+nolist:={};
+for i in [1..#Slist3-1] do;
+for j in [i+1..#Slist3] do;
+if IsConjugate(G,Slist0[i],Slist0[j]) then
+nolist:=nolist join {Slist0[j]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs notin nolist];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#Slist4] do
+if GL2Genus(Slist4[i]) lt 2 then
+<i,GL2Level(Slist4[i]), GL2Genus(Slist4[i]), GL2Index(Slist4[i])>;
+end if;
+end for;
+
+// 1 hit
+
+// 72.72.1.b.1
+
+N:=72;
+
+G:=GL(2,Integers(N));
+
+GENS:=[[41,12,2,7],[49,54,16,71],[55,38,18,29],[60,37,1,18],[64,23,69,14]];
+
+X:=sub<G|GENS>;
+
+S:=Subgroups(X);
+Slist0:=[s`subgroup : s in S];
+
+Slist1:=[s:s in Slist0 | G![-1,0,0,-1] in s];
+
+#Slist1;
+
+Slist2:=[s:s in Slist1 | #{Determinant(x) : x in s} eq EulerPhi(N)];
+
+#Slist2;
+
+Slist3:={};
+
+for s in Slist2 do
+DetTra:={<Determinant(g),Trace(g)> : g in s};
+if <-1,0> in DetTra then
+Slist3:=Slist3 join {s};
+end if;
+end for;
+
+Slist3:=[s : s in Slist3];
+
+nolist:={};
+for i in [1..#Slist3-1] do;
+for j in [i+1..#Slist3] do;
+if IsConjugate(G,Slist0[i],Slist0[j]) then
+nolist:=nolist join {Slist0[j]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs notin nolist];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#Slist4] do
+if GL2Genus(Slist4[i]) lt 2 then
+<i,GL2Level(Slist4[i]), GL2Genus(Slist4[i]), GL2Index(Slist4[i])>;
+end if;
+end for;
+
+// 1 hit
+
+// 72.72.1.c.1
+
+N:=72;
+
+G:=GL(2,Integers(N));
+
+GENS:=[[3,20,34,7],[24,49,47,26],[65,24,10,55],[67,52,32,33],[69,34,38,11]];
+
+X:=sub<G|GENS>;
+
+S:=Subgroups(X);
+Slist0:=[s`subgroup : s in S];
+
+Slist1:=[s:s in Slist0 | G![-1,0,0,-1] in s];
+
+#Slist1;
+
+Slist2:=[s:s in Slist1 | #{Determinant(x) : x in s} eq EulerPhi(N)];
+
+#Slist2;
+
+Slist3:={};
+
+for s in Slist2 do
+DetTra:={<Determinant(g),Trace(g)> : g in s};
+if <-1,0> in DetTra then
+Slist3:=Slist3 join {s};
+end if;
+end for;
+
+Slist3:=[s : s in Slist3];
+
+nolist:={};
+for i in [1..#Slist3-1] do;
+for j in [i+1..#Slist3] do;
+if IsConjugate(G,Slist0[i],Slist0[j]) then
+nolist:=nolist join {Slist0[j]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs notin nolist];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#Slist4] do
+if GL2Genus(Slist4[i]) lt 2 then
+<i,GL2Level(Slist4[i]), GL2Genus(Slist4[i]), GL2Index(Slist4[i])>;
+end if;
+end for;
+
+// 1 hit
+
+
+
+// IGNORE THE REST
 !!!!!!!!
 
 GRS:=GL(2,Integers(R*S));
