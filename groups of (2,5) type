@@ -1386,6 +1386,17 @@ H40241137:=sub<G40|[5,27,29,18],[36,31,29,8],[37,35,9,38]>;
 M40241137:=CreateModularCurveRec(40,Generators(H40241137));
 FindModelOfXG(M40241137,1); EllipticCurve([0,1,0,-165,763]), label 320.a1
 
+X:=EllipticCurve([0,1,0,-145,975]);
+g:=Generators(X)[2];
+Order(g); // 0
+
+XX:=EllipticCurve([0,1,0,-165,763]);
+gg:=Generators(XX)[2];
+Order(gg); // 0
+
+_,phi:=IsIsogenous(XX,X);
+phi(gg) eq 2*g; // true
+
 // second collection of groups of level 40 to study
 
 H402012:=sub<G40|[2,31,29,21],[3,30,0,13],[8,1,29,32],[17,6,14,3]>;
