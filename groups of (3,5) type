@@ -222,7 +222,7 @@ IsConjugate(G15,A9,ANSWERS[9][3]); // true
 
 A2 subset A7; // true
 A8 subset A7; // true
-
+// A7 is Borel subgroup modulo 15, which generates an elliptic curve of rank 0
 
 // here we check that no proper subgroup of 15.30.1.1 or 15.45.1.1 has genus < 2
 
