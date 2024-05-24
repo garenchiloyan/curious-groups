@@ -50,19 +50,19 @@ H74:=sub<G7|[6,0,1,6],[3,0,0,1]>; /* 7.24.0.1, 7.24.0.a.1 */
 H75:=sub<G7|[6,0,1,6],[3,0,0,4]>; /* 7.24.0.3, 7.24.0.b.1 */
 H76:=sub<G7|[3,1,4,4],[4,4,1,3],[3,4,0,4]>; /* 7.28.0.1, 7.28.0.a.1, MAXIMAL */
 
-X31:=sub<GLeftRight|[0,1,2,0],[1,1,1,2],[1,0,0,2]>; /* 3.3.0.1, 3.3.0.a.1, MAXIMAL */
-X32:=sub<GLeftRight|[0,1,2,1],[1,2,0,2]>; /* 3.4.0.1, 3.4.0.a.1, MAXIMAL */
+X31:=sub<GLeftRight|[0,1,2,0],[1,1,1,2],[1,0,0,2]>; /* 3.3.0.1, 3.3.0.a.1, MAXIMAL, with Chinese Remainder Theorem */
+X32:=sub<GLeftRight|[0,1,2,1],[1,2,0,2]>; /* 3.4.0.1, 3.4.0.a.1, MAXIMAL, with Chinese Remainder Theorem */
 X33:=sub<GLeftRight|[0,1,2,0],[1,0,0,2]>; /* 3.6.0.1, 3.6.0.b.1 */
 X34:=sub<GLeftRight|[2,0,0,2],[1,0,0,2]>; /* 3.12.0.1, 3.12.0.a.1 */
 
 LeftGroups:=[X31,X32,X33,X34];
 
-X71:=sub<GLeftRight|[2,0,0,4],[3+7,0,1,5],[1,0,0,3+7]>; /* 7.8.0.1, 7.8.0.a.1, MAXIMAL */
-X72:=sub<GLeftRight|[0,3+7,2,3],[2+7,4,4,5],[3+7,1,0,4]>; /* 7.21.0.1, 7.21.0.a.1, MAXIMAL */
+X71:=sub<GLeftRight|[2,0,0,4],[3+7,0,1,5],[1,0,0,3+7]>; /* 7.8.0.1, 7.8.0.a.1, MAXIMAL, with Chinese Remainder Theorem */
+X72:=sub<GLeftRight|[0,3+7,2,3],[2+7,4,4,5],[3+7,1,0,4]>; /* 7.21.0.1, 7.21.0.a.1, MAXIMAL, with Chinese Remainder Theorem */
 X73:=sub<GLeftRight|[6+7,0,1,6+7],[1,0,0,3+7]>; /* 7.24.0.2, 7.24.0.a.2 */
 X74:=sub<GLeftRight|[6+7,0,1,6+7],[3+7,0,0,1]>; /* 7.24.0.1, 7.24.0.a.1 */
 X75:=sub<GLeftRight|[6+7,0,1,6+7],[3+7,0,0,4]>; /* 7.24.0.3, 7.24.0.b.1 */
-X76:=sub<GLeftRight|[3,1,4,4],[4,4,1,3],[3+7,4,0,4]>; /* 7.28.0.1, 7.28.0.a.1, MAXIMAL */
+X76:=sub<GLeftRight|[3,1,4,4],[4,4,1,3],[3+7,4,0,4]>; /* 7.28.0.1, 7.28.0.a.1, MAXIMAL, with Chinese Remainder Theorem */
 
 RightGroups:=[X71,X72,X73,X74,X75,X76];
 
@@ -103,7 +103,7 @@ X92:=sub<G9|[1,1,0,1],[2,0,0,5],[1,0,0,2]>; /* 9.12.0.1, 9.12.0.a.1 */
 X93:=sub<G9|[2,0,0,5],[4,2,3,4],[1,0,0,2]>; /* 9.12.0.2, 9.12.0.b.1 */
 X94:=sub<G9|[2,0,0,5],[1,3,3,1],[0,2,4,0],[1,0,0,2]>; /* 9.18.0.2, 9.18.0.d.1 */
 X95:=sub<G9|[1,3,0,1],[2,1,1,1],[4,2,0,5]>; /* 9.18.0.1, 9.18.0.a.1 */
-X96:=sub<G9|[0,2,4,1],[4,3,5,4],[4,5,0,5]>; /* 9.27.0.1, 9.27.0.a.1, MAXIMAL */
+X96:=sub<G9|[0,2,4,1],[4,3,5,4],[4,5,0,5]>; /* 9.27.0.1, 9.27.0.a.1, MAXIMAL, with Chinese Remainder Theorem */
 X97:=sub<G9|[0,4,2,3],[5,1,1,4],[5,3,0,4]>; /* 9.27.0.2, 9.27.0.b.1 */
 X98:=sub<G9|[1,3,0,1],[5,0,3,2],[1,0,2,2]>; /* 9.36.0.2, 9.36.0.b.1 */
 X99:=sub<G9|[1,3,0,1],[5,0,3,2],[2,1,0,1]>; /* 9.36.0.1, 9.36.0.a.1 */
@@ -151,6 +151,56 @@ N:=21;
 G:=GL(2,Integers(N));
 
 X:=sub<G|[2,14,16,5],[6,20,7,15],[10,18,18,7],[14,3,3,10]>;
+
+S:=Subgroups(X);
+Slist0:=[s`subgroup : s in S];
+
+Slist1:=[s:s in Slist0 | G![-1,0,0,-1] in s];
+
+#Slist1;
+
+Slist2:=[s:s in Slist1 | #{Determinant(x) : x in s} eq EulerPhi(N)];
+
+#Slist2;
+
+Slist3:={};
+
+for s in Slist2 do
+DetTra:={<Determinant(g),Trace(g)> : g in s};
+if <-1,0> in DetTra then
+Slist3:=Slist3 join {s};
+end if;
+end for;
+
+Slist3:=[s : s in Slist3];
+
+nolist:={};
+for i in [1..#Slist3-1] do;
+for j in [i+1..#Slist3] do;
+if IsConjugate(G,Slist0[i],Slist0[j]) then
+nolist:=nolist join {Slist0[j]};
+end if;
+end for;
+end for;
+Slist4:=[subs : subs in Slist3 | subs notin nolist];
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+for i in [1..#Slist4] do
+if GL2Genus(Slist4[i]) lt 2 then
+<i,GL2Level(Slist4[i]), GL2Genus(Slist4[i]), GL2Index(Slist4[i])>;
+end if;
+end for;
+
+// here we check that all proper, arithmetically admissible subgroups of A2 have genus > 1
+
+N:=21;
+
+G:=GL(2,Integers(N));
+
+X:=sub<G|[5,11,0,17],[5,19,0,16],[16,6,0,13],[19,17,0,4]>;
 
 S:=Subgroups(X);
 Slist0:=[s`subgroup : s in S];
