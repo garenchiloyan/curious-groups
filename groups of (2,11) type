@@ -22,7 +22,7 @@ GLeftRight:=GL(2,Integers(Left*Right));
 /* #2.) 2.3.0.a.1, MAXIMAL */ X22:=sub<G2|[0,1,1,0]>;
 /* #3.) 2.2.0.a.1 */ H23:=sub<G2|[]>;
 
-X111:=sub<GLeftRight|[3,4,4,2+11],[3,1,1,8],[6+11,4,0,5]>; /* 11.55.1.1, 11.55.1.b.1 */
+X111:=sub<GLeftRight|[3,4,4,2+11],[3,1,1,8],[6+11,4,0,5]>; /* 11.55.1.1, 11.55.1.b.1, MAXIMAL, with Chinese remainder theorem */
 
 LeftGroups:=[X21,X22];
 RightGroups:=[X111];
