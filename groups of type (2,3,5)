@@ -1,10 +1,4 @@
-ANSWERS:={};
-
-G2:=GL(2,Integers(2));
-G4:=GL(2,Integers(4));
-G8:=GL(2,Integers(8));
-G3:=GL(2,Integers(3));
-G5:=GL(2,Integers(5));
+/* direct product of 4.4.0.1 and 3.3.0.1 and 5.5.0.1 */
 
 Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
 load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
@@ -31,9 +25,150 @@ KerRight1:=[[1+Right*x,0,0,1] : x in [0..Left*Middle] | GCD(1+Right*x,Left*Middl
 KerRight2:=[[1,0,0,1+Right*x] : x in [0..Left*Middle] | GCD(1+Right*x,Left*Middle*Right) eq 1];
 KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
 
-XLeft:=sub<G|Generators(Left),KerLeft1,KerLeft2,KerLeft3>;
-XMiddle:=sub<G|Generators(Middle),KerMiddle1,KerMiddle2,KerMiddle3>;
-XRight:=sub<G|Generators(Right),KerRight1,KerRight2,KerRight3>;
+XLeft:=sub<G|Generators(XLeft),KerLeft1,KerLeft2,KerLeft3>;
+XMiddle:=sub<G|Generators(XMiddle),KerMiddle1,KerMiddle2,KerMiddle3>;
+XRight:=sub<G|Generators(XRight),KerRight1,KerRight2,KerRight3>;
 
 X:=XLeft meet XMiddle meet XRight;
-GL2Genus(X);
+GL2Genus(X); // 4
+
+
+/* direct product of 8.2.0.2 and 3.3.0.1 and 5.5.0.1 */
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+Left:=8;
+Middle:=3;
+Right:=5;
+
+G:=GL(2,Integers(Left*Middle*Right));
+
+XLeft:=sub<G|[5+8,2,1,1],[5,7,7,0]>;
+XMiddle:=sub<G|[3,2,2,1],[1,0,2,2+9]>;
+XRight:=sub<G|[1,2+5,2+5,0],[2+5,0,2,4+15]>;
+
+KerLeft1:=[[1+Left*x,0,0,1] : x in [0..Middle*Right] | GCD(1+Left*x,Left*Middle*Right) eq 1];
+KerLeft2:=[[1,0,0,1+Left*x] : x in [0..Middle*Right] | GCD(1+Left*x,Left*Middle*Right) eq 1];
+KerLeft3:=[[1,Left,0,1],[1,0,Left,1]];
+
+KerMiddle1:=[[1+Middle*x,0,0,1] : x in [0..Left*Right] | GCD(1+Middle*x,Left*Middle*Right) eq 1];
+KerMiddle2:=[[1,0,0,1+Middle*x] : x in [0..Left*Right] | GCD(1+Middle*x,Left*Middle*Right) eq 1];
+KerMiddle3:=[[1,Middle,0,1],[1,0,Middle,1]];
+
+KerRight1:=[[1+Right*x,0,0,1] : x in [0..Left*Middle] | GCD(1+Right*x,Left*Middle*Right) eq 1];
+KerRight2:=[[1,0,0,1+Right*x] : x in [0..Left*Middle] | GCD(1+Right*x,Left*Middle*Right) eq 1];
+KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
+
+XLeft:=sub<G|Generators(XLeft),KerLeft1,KerLeft2,KerLeft3>;
+XMiddle:=sub<G|Generators(XMiddle),KerMiddle1,KerMiddle2,KerMiddle3>;
+XRight:=sub<G|Generators(XRight),KerRight1,KerRight2,KerRight3>;
+
+X:=XLeft meet XMiddle meet XRight;
+GL2Genus(X); // 3
+
+
+/* direct product of 2.3.0.1 and 3.3.0.1 and 5.6.0.1 */
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+Left:=2;
+Middle:=3;
+Right:=5;
+
+G:=GL(2,Integers(Left*Middle*Right));
+
+XLeft:=sub<G|[1,1,0,1]>;
+XMiddle:=sub<G|[3,2,2,1],[1,0,2,2+9]>;
+XRight:=sub<G|[2+5,2,0,1],[3+10,4,0,3+10]>;
+
+KerLeft1:=[[1+Left*x,0,0,1] : x in [0..Middle*Right] | GCD(1+Left*x,Left*Middle*Right) eq 1];
+KerLeft2:=[[1,0,0,1+Left*x] : x in [0..Middle*Right] | GCD(1+Left*x,Left*Middle*Right) eq 1];
+KerLeft3:=[[1,Left,0,1],[1,0,Left,1]];
+
+KerMiddle1:=[[1+Middle*x,0,0,1] : x in [0..Left*Right] | GCD(1+Middle*x,Left*Middle*Right) eq 1];
+KerMiddle2:=[[1,0,0,1+Middle*x] : x in [0..Left*Right] | GCD(1+Middle*x,Left*Middle*Right) eq 1];
+KerMiddle3:=[[1,Middle,0,1],[1,0,Middle,1]];
+
+KerRight1:=[[1+Right*x,0,0,1] : x in [0..Left*Middle] | GCD(1+Right*x,Left*Middle*Right) eq 1];
+KerRight2:=[[1,0,0,1+Right*x] : x in [0..Left*Middle] | GCD(1+Right*x,Left*Middle*Right) eq 1];
+KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
+
+XLeft:=sub<G|Generators(XLeft),KerLeft1,KerLeft2,KerLeft3>;
+XMiddle:=sub<G|Generators(XMiddle),KerMiddle1,KerMiddle2,KerMiddle3>;
+XRight:=sub<G|Generators(XRight),KerRight1,KerRight2,KerRight3>;
+
+X:=XLeft meet XMiddle meet XRight;
+GL2Genus(X); // 2
+
+
+/* direct product of 8.6.0.2 and 3.3.0.1 and 5.6.0.1 */
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+Left:=8;
+Middle:=3;
+Right:=5;
+
+G:=GL(2,Integers(Left*Middle*Right));
+
+XLeft:=sub<G|[1,4,6,3+8],[3,1,6+8,7],[5,4,4,3]>;
+XMiddle:=sub<G|[3,2,2,1],[1,0,2,2+9]>;
+XRight:=sub<G|[2+5,2,0,1],[3+10,4,0,3+10]>;
+
+KerLeft1:=[[1+Left*x,0,0,1] : x in [0..Middle*Right] | GCD(1+Left*x,Left*Middle*Right) eq 1];
+KerLeft2:=[[1,0,0,1+Left*x] : x in [0..Middle*Right] | GCD(1+Left*x,Left*Middle*Right) eq 1];
+KerLeft3:=[[1,Left,0,1],[1,0,Left,1]];
+
+KerMiddle1:=[[1+Middle*x,0,0,1] : x in [0..Left*Right] | GCD(1+Middle*x,Left*Middle*Right) eq 1];
+KerMiddle2:=[[1,0,0,1+Middle*x] : x in [0..Left*Right] | GCD(1+Middle*x,Left*Middle*Right) eq 1];
+KerMiddle3:=[[1,Middle,0,1],[1,0,Middle,1]];
+
+KerRight1:=[[1+Right*x,0,0,1] : x in [0..Left*Middle] | GCD(1+Right*x,Left*Middle*Right) eq 1];
+KerRight2:=[[1,0,0,1+Right*x] : x in [0..Left*Middle] | GCD(1+Right*x,Left*Middle*Right) eq 1];
+KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
+
+XLeft:=sub<G|Generators(XLeft),KerLeft1,KerLeft2,KerLeft3>;
+XMiddle:=sub<G|Generators(XMiddle),KerMiddle1,KerMiddle2,KerMiddle3>;
+XRight:=sub<G|Generators(XRight),KerRight1,KerRight2,KerRight3>;
+
+X:=XLeft meet XMiddle meet XRight;
+GL2Genus(X); // 5
+
+
+/* direct product of 8.2.0.2 and 3.3.0.1 and 5.10.0.1 */
+
+Attach("/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2.m");
+load "/users/garenchiloyan/Desktop/ell-adic-galois-images-main/groups/gl2data.m";
+
+Left:=8;
+Middle:=3;
+Right:=5;
+
+G:=GL(2,Integers(Left*Middle*Right));
+
+XLeft:=sub<G|[5+8,2,1,1],[5,7,7,0]>;
+XMiddle:=sub<G|[3,2,2,1],[1,0,2,2+9]>;
+XRight:=sub<G|[3,4,1,2+5],[4+15,4,0,1]>;
+
+KerLeft1:=[[1+Left*x,0,0,1] : x in [0..Middle*Right] | GCD(1+Left*x,Left*Middle*Right) eq 1];
+KerLeft2:=[[1,0,0,1+Left*x] : x in [0..Middle*Right] | GCD(1+Left*x,Left*Middle*Right) eq 1];
+KerLeft3:=[[1,Left,0,1],[1,0,Left,1]];
+
+KerMiddle1:=[[1+Middle*x,0,0,1] : x in [0..Left*Right] | GCD(1+Middle*x,Left*Middle*Right) eq 1];
+KerMiddle2:=[[1,0,0,1+Middle*x] : x in [0..Left*Right] | GCD(1+Middle*x,Left*Middle*Right) eq 1];
+KerMiddle3:=[[1,Middle,0,1],[1,0,Middle,1]];
+
+KerRight1:=[[1+Right*x,0,0,1] : x in [0..Left*Middle] | GCD(1+Right*x,Left*Middle*Right) eq 1];
+KerRight2:=[[1,0,0,1+Right*x] : x in [0..Left*Middle] | GCD(1+Right*x,Left*Middle*Right) eq 1];
+KerRight3:=[[1,Right,0,1],[1,0,Right,1]];
+
+XLeft:=sub<G|Generators(XLeft),KerLeft1,KerLeft2,KerLeft3>;
+XMiddle:=sub<G|Generators(XMiddle),KerMiddle1,KerMiddle2,KerMiddle3>;
+XRight:=sub<G|Generators(XRight),KerRight1,KerRight2,KerRight3>;
+
+X:=XLeft meet XMiddle meet XRight;
+GL2Genus(X); // 5
+
