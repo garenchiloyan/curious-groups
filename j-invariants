@@ -60,7 +60,7 @@ pol := Numerator(j1-j2);
 C := ProjectiveClosure(Curve(AffineSpace(Rationals(),2),pol));
 
 // Find a non-singular point.
-pt := C![-1,2,1];
+pt := C![-1,4,1];
 // Map to elliptic curve
 
 E, phi := EllipticCurve(C,pt);
