@@ -10,7 +10,7 @@ QQ:=Rationals();
 // NUM241213 := 1*(36*x^2*y^2+509328*x^2*z^2+1188*x*y^2*z+13296960*x*z^3+y^4+22896*y^2*z^2+84960576*z^4);
 // DEN241213 := 2^3*(z^2*(36*x^2+972*x*z+y^2+6480*z^2));
 
-P<x>:=PolynomialRing(QQ);
+P<x>:=FunctionField(QQ);
 
 X:=x;
 // plug in Y:=y^2;
